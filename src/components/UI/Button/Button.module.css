@@ -1,0 +1,25 @@
+.Button {
+  padding: .75em 1.875em;
+  font-size: .8125em;
+  transition: .3s all ease-in-out;
+}
+
+.BlockCover {
+  background-color: white;
+  color: #207dff;
+  border: 1px solid #207dff;
+}
+
+.BlockCover:hover {
+  background-color: #207dff;
+  color: white;
+}
+
+.NewCollection {
+  background: black;
+  color: white;
+}
+
+.NewCollection:hover {
+  opacity: 0.7;
+}
