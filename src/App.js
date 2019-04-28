@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {Fragment} from "react";
 
-import Home from './containers/Home/Home';
+import Layout from './hoc/Layout/Layout';
+import Home from "./containers/Home/Home";
 
 function App() {
   return (
-    <div>
-      <Home />
-    </div>
+    <Fragment>
+      <Layout>
+        <Home />
+      </Layout>
+    </Fragment>
   );
 }
 

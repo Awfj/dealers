@@ -24,7 +24,6 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <h1>Home</h1>
         <BlockCover
           collection={this.state.collections.summer}
           blockCover={this.state.blockCoverPics}

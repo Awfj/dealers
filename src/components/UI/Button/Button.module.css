@@ -1,6 +1,7 @@
 .Button {
   padding: .75em 1.875em;
   font-size: .8125em;
+  text-transform: uppercase;
   transition: .3s all ease-in-out;
 }
 
