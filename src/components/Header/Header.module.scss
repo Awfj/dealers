@@ -1,14 +1,37 @@
 .Header {
-  border: 1px solid #000;
-  padding: 2em 0;
-  display: grid;
-  grid-template-columns: auto auto;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.Header a {
-  border: 1px solid #000;
-  padding: 1em;
-  display: inline-block;
+  background-color: #f9f9f9;
+  .wrapper {
+    border: 1px solid #000;
+    padding: 2em 0;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  a {
+    border: 1px solid #000;
+    padding: 1em;
+    display: inline-block;
+  }
+  .logo {
+    justify-self: start;
+  }
+  nav {
+    justify-self: center;
+    a {
+      font-size: 0.938rem;
+      text-transform: uppercase;
+      color: #25262a;
+      transition: .2s all ease-in-out;
+      &:hover {
+        color: #207dff;
+      }
+    }
+  }
+  .icons {
+    justify-self: end;
+    a {
+      color: #000;
+    }
+  }
 }

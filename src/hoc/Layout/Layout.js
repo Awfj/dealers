@@ -1,15 +1,17 @@
 import React, {Component, Fragment} from 'react';
 
 import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 
 class Layout extends Component {
   render() {
     return (
       <Fragment>
         <Header />
-        <main>
+        {/* <main>
           {this.props.children}
-        </main>
+        </main> */}
+        <Footer />
       </Fragment>
     )
   }

@@ -1,0 +1,44 @@
+.Footer {
+  background-color: #fff;
+  padding: 4em 0;
+  .wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto auto auto;
+    margin-bottom: 3em;
+  }
+  h4 {
+    font-weight: normal;
+    font-size: 1.2rem;
+    color: #000;
+    margin-bottom: 1em;
+  }
+  .about {
+    max-width: 300px;
+    justify-self: start;
+    p {
+      font-size: 1rem;
+      color: #8c92a0;
+      line-height: 1.7;
+    }
+  }
+  .contact {
+    justify-self: center;
+    max-width: 300px;
+    p, a {
+      margin-bottom: 1em;
+    }
+    a {
+      display: inline-block;
+    }
+  }
+  .subscribe {
+    justify-self: end;
+  }
+  .copyright {
+    text-align: center;
+    font-size: 1rem;
+    color: #8c92a0;
+  }
+}
