@@ -18,9 +18,20 @@ const footer = () => {
 
         <div className={classes.contact}>
           <h4>Contact Info</h4>
-          <p><FontAwesomeIcon icon={['fas', 'map-marker-alt']} /> 203 Fake St. Mountain View, San Francisco, California, USA</p>
-          <a href="/"><FontAwesomeIcon icon={['fas', 'phone']} /> +2 392 3929 210</a>
-          <p><FontAwesomeIcon icon={['fas', 'envelope']} /> emailaddress@domain.com</p>
+          <p>
+            <FontAwesomeIcon icon={["fas", "map-marker-alt"]} /> 203 Fake St.
+            Mountain View, San Francisco, California, USA
+          </p>
+          <p>
+            <a href="/">
+              <FontAwesomeIcon icon={["fas", "phone"]} /> +2 392 3929 210
+            </a>
+          </p>
+
+          <p>
+            <FontAwesomeIcon icon={["fas", "envelope"]} />{" "}
+            emailaddress@domain.com
+          </p>
         </div>
 
         <div className={classes.subscribe}>
@@ -31,7 +42,10 @@ const footer = () => {
           </form>
         </div>
       </div>
-      <p className={classes.copyright}>Copyright ©2019 All rights reserved | This template is made with <FontAwesomeIcon icon={['fas', 'heart']} /> by <a href="/">Colorlib</a></p>
+      <p className={classes.copyright}>
+        Copyright ©2019 All rights reserved | This template is made with{" "}
+        <FontAwesomeIcon icon={["fas", "heart"]} /> by <a href="/">Colorlib</a>
+      </p>
     </footer>
   );
 };

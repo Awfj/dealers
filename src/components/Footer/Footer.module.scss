@@ -1,12 +1,14 @@
 .Footer {
   background-color: #fff;
-  padding: 4em 0;
+  padding: 2em 10px;
   .wrapper {
     max-width: 1200px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto auto auto;
     margin-bottom: 3em;
+    display: grid;
+    grid-template-columns: auto;
+    justify-items: start;
+    grid-gap: 1.5em;
   }
   h4 {
     font-weight: normal;
@@ -15,8 +17,6 @@
     margin-bottom: 1em;
   }
   .about {
-    max-width: 300px;
-    justify-self: start;
     p {
       font-size: 1rem;
       color: #8c92a0;
@@ -24,21 +24,81 @@
     }
   }
   .contact {
-    justify-self: center;
     max-width: 300px;
-    p, a {
-      margin-bottom: 1em;
+    p {
+      color: #25262a;
+      &:not(:last-child) {
+        margin-bottom: 1em;
+      }
     }
     a {
       display: inline-block;
+      color: #5c626e;
+      transition: .2s all ease-in-out;
+      &:hover {
+        color: #207dff;
+      }
+    }
+    svg {
+      color: #207dff;
+      margin-right: .5em;
     }
   }
   .subscribe {
-    justify-self: end;
+    // justify-self: end;
+  }
+  form {
+    // border: 1px solid #000;
+    position: relative;
+  }
+  input {
+    padding: .9em;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 1rem;
+    color: #495057;
+  }
+  button {
+    display: block;
+    background-color: #207dff;
+    color: white;
+    border-radius: 4px;
+    padding: 1em;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: .3em;
+    font-size: .8125rem;
+    text-transform: uppercase;
+    transition: .2s all ease-in-out;
+    &:hover {
+      background-color: #0068f9;
+    }
   }
   .copyright {
     text-align: center;
     font-size: 1rem;
     color: #8c92a0;
+    a {
+      color: #207dff;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .Footer {
+    .wrapper {
+      grid-template-columns: auto auto auto;
+    }
+    .about {
+      justify-self: start;
+      max-width: 300px;
+    }
+    .contact {
+      justify-self: center;
+    }
+    .subscribe {
+      justify-self: end;
+    }
   }
 }
