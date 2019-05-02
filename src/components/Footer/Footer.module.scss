@@ -2,13 +2,12 @@
   background-color: #fff;
   padding: 2em 10px;
   .wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-bottom: 3em;
     display: grid;
     grid-template-columns: auto;
-    justify-items: start;
     grid-gap: 1.5em;
+    justify-items: stretch;
+    margin: 0 auto 3em;
+    max-width: 1200px;
   }
   h4 {
     font-weight: normal;
@@ -24,9 +23,9 @@
     }
   }
   .contact {
-    max-width: 300px;
     p {
       color: #25262a;
+      line-height: 1.5;
       &:not(:last-child) {
         margin-bottom: 1em;
       }
@@ -34,45 +33,45 @@
     a {
       display: inline-block;
       color: #5c626e;
-      transition: .2s all ease-in-out;
+      transition: 0.2s all ease-in-out;
       &:hover {
         color: #207dff;
       }
     }
     svg {
       color: #207dff;
-      margin-right: .5em;
+      margin-right: 0.5em;
     }
   }
   .subscribe {
-    // justify-self: end;
-  }
-  form {
-    // border: 1px solid #000;
-    position: relative;
-  }
-  input {
-    padding: .9em;
-    border: 1px solid #ced4da;
-    border-radius: 4px;
-    font-size: 1rem;
-    color: #495057;
-  }
-  button {
-    display: block;
-    background-color: #207dff;
-    color: white;
-    border-radius: 4px;
-    padding: 1em;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    right: .3em;
-    font-size: .8125rem;
-    text-transform: uppercase;
-    transition: .2s all ease-in-out;
-    &:hover {
-      background-color: #0068f9;
+    form {
+      position: relative;
+    }
+    input {
+      padding: 0.9em;
+      border: 1px solid #ced4da;
+      border-radius: 4px;
+      font-size: 1rem;
+      color: #495057;
+      width: 100%;
+    }
+    button {
+      display: block;
+      background-color: #207dff;
+      color: white;
+      border-radius: 4px;
+      padding: 1em 0;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      right: 0.3em;
+      font-size: 0.8125rem;
+      text-transform: uppercase;
+      transition: 0.2s all ease-in-out;
+      width: 22%;
+      &:hover {
+        background-color: #0068f9;
+      }
     }
   }
   .copyright {
@@ -87,18 +86,43 @@
 
 @media (min-width: 600px) {
   .Footer {
+    padding: 2em 100px;
     .wrapper {
-      grid-template-columns: auto auto auto;
+      grid-template-columns: auto;
     }
     .about {
       justify-self: start;
-      max-width: 300px;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .Footer {
+    padding: 2em 50px;
+    .wrapper {
+      grid-gap: 1.5em 2.5em;
+      grid-template-columns: 1fr 1fr;
     }
     .contact {
-      justify-self: center;
+      justify-self: end;
     }
     .subscribe {
-      justify-self: end;
+      form {
+        width: 300px;
+      }
+      button {
+        padding: 1em;
+        width: initial;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .Footer {
+    .wrapper {
+      max-width: 1200px;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
 }

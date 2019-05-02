@@ -5,22 +5,22 @@
   transition: .3s all ease-in-out;
 }
 
-.BlockCover {
+/* .CoverBlock {
   background-color: white;
   color: #207dff;
   border: 1px solid #207dff;
 }
 
-.BlockCover:hover {
+.CoverBlock:hover {
   background-color: #207dff;
   color: white;
-}
+} */
 
-.NewCollection {
+.CoverBlock {
   background: black;
   color: white;
 }
 
-.NewCollection:hover {
+.CoverBlock:hover {
   opacity: 0.7;
 }
