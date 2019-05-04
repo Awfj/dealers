@@ -1,9 +1,10 @@
 import React, { Component, Fragment } from "react";
 
 import CoverBlocks from "../../components/CoverBlocks/CoverBlocks";
-// import coverBlockImg_1 from "../../assets/images/cover-block/cover-block-1.png";
+import Banner from "../../components/Banner/Banner";
+import bannerCollection from "../../assets/images/banner/banner-collection.png";
+import coverBlockImg_1 from "../../assets/images/cover-block/cover-block-1.png";
 import coverBlockImg_2 from "../../assets/images/cover-block/cover-block-2.png";
-import coverBlockImg_3 from "../../assets/images/cover-block/cover-block-3.png";
 
 // const COLLECTION_PRICES = {
 //   summer: 1.999
@@ -11,27 +12,31 @@ import coverBlockImg_3 from "../../assets/images/cover-block/cover-block-3.png";
 
 class Home extends Component {
   state = {
-    collections: {
-      summer: {
-        // collectionType: "Summer Collection",
-        // collectionName: "Madewell",
-        // price: 1.999,
-        // discountPrice: 1.499
+    banner: {
+      collection: {
+        name: "Madewell",
+        type: "Summer Collection",
+        price: 1.999,
+        discountPrice: 1.499,
+        image: bannerCollection
       }
     },
     coverBlock: {
-      title: '#NEW SUMMER COLLECTION 2019',
-      items: ["Jacket", "New Denim Coat"],
-      images: [coverBlockImg_2, coverBlockImg_3]
+      title: "#NEW SUMMER COLLECTION 2019",
+      items: [
+        { name: "Jacket", image: coverBlockImg_1 },
+        { name: "New Denim Coat", image: coverBlockImg_2 }
+      ]
     }
   };
 
   render() {
     return (
       <Fragment>
+        <Banner collection={this.state.banner.collection} />
         <CoverBlocks
-          // collection={this.state.collections.summer}
-          coverBlocks={this.state.coverBlock}
+          title={this.state.coverBlock.title}
+          items={this.state.coverBlock.items}
         />
       </Fragment>
     );
