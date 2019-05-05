@@ -1,0 +1,24 @@
+.ProductPreview {
+  border: 1px solid #eee;
+  color: #000;
+  img {
+    margin: 0 auto;
+  }
+  .info {
+    border: 1px solid #000;
+    text-align: center;
+  }
+  h3 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 0.5em;
+  }
+  .collection {
+    font-size: 1rem;
+    color: gray;
+    margin-bottom: 0.5em;
+  }
+  .price {
+    font-size: 1.5rem;
+  }
+}

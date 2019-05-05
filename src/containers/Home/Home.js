@@ -2,13 +2,11 @@ import React, { Component, Fragment } from "react";
 
 import CoverBlocks from "../../components/CoverBlocks/CoverBlocks";
 import Banner from "../../components/Banner/Banner";
+import ProductsPreview from '../../components/ProductsPreview/ProductsPreview';
+
 import bannerCollection from "../../assets/images/banner/banner-collection.png";
 import coverBlockImg_1 from "../../assets/images/cover-block/cover-block-1.png";
 import coverBlockImg_2 from "../../assets/images/cover-block/cover-block-2.png";
-
-// const COLLECTION_PRICES = {
-//   summer: 1.999
-// };
 
 class Home extends Component {
   state = {
@@ -33,7 +31,8 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <Banner collection={this.state.banner.collection} />
+        <Banner banner={this.props.banner} />
+        <ProductsPreview products={this.props.products} />
         <CoverBlocks
           title={this.state.coverBlock.title}
           items={this.state.coverBlock.items}
