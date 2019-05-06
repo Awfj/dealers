@@ -1,5 +1,16 @@
 .ProductsPreview {
-  padding: 0 10px;
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (min-width: 600px) {
+  .ProductsPreview {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 992px) {
+  .ProductsPreview {
+    padding: 0 15px;
+  }
 }

@@ -1,0 +1,77 @@
+.ContactForm {
+  margin: 0 auto;
+  padding: 5em 0;
+  max-width: 1140px;
+  h2 {
+    font-size: 1.75rem;
+    font-weight: normal;
+    margin-bottom: .3em;
+  }
+  .wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 2em;
+    margin: 0 auto;
+  }
+  form {
+    display: grid;
+    grid-gap: 1em;
+    justify-self: end;
+    border: 1px solid #eee;
+    padding: 3em;
+    .nameGroup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2em;
+    }
+    label {
+      color: #000;
+      font-size: 1rem;
+    }
+    input,
+    textarea {
+      border: 1px solid #ced4da;
+      border-radius: 0.25rem;
+      font-size: 1rem;
+      margin-top: 0.5em;
+      padding: .7em 1em;
+      width: 100%;
+    }
+    textarea {
+      resize: vertical;
+    }
+    button {
+      color: white;
+      background-color: #207dff;
+      border-radius: 0.3rem;
+      font-size: 0.8125rem;
+      padding: 1em;
+      text-transform: uppercase;
+      transition: .3s all ease-in-out;
+      width: 100%;
+      &:hover {
+        background-color: #0068f9;
+      }
+    }
+  }
+  .addresses {
+    display: grid;
+    grid-gap: 1em;
+    align-self: start;
+  }
+  .addressGroup {
+    border: 1px solid #eee;
+    padding: 2em;
+    h4 {
+      color: #207dff;
+      font-size: 1rem;
+      font-weight: bold;
+      margin-bottom: .7em;
+      text-transform: uppercase;
+    }
+    p {
+      color: #8c92a0;
+      font-size: 1rem;
+    }
+  }
+}

@@ -5,7 +5,8 @@ import { far } from "@fortawesome/free-regular-svg-icons";
 
 import Layout from "../../hoc/Layout/Layout";
 import Home from "../Home/Home";
-import bannerCollection from "../../assets/images/banner/banner-collection.png";
+import Contact from '../Contact/Contact';
+import bannerHome from "../../assets/images/banner/banner-home.png";
 import product_1 from '../../assets/images/products/product_1.jpg';
 import product_2 from '../../assets/images/products/product_2.jpg';
 import product_3 from '../../assets/images/products/product_3.jpg';
@@ -20,7 +21,7 @@ class App extends Component {
         type: "Summer Collection",
         price: 1.999,
         discountPrice: 1.499,
-        image: bannerCollection
+        image: bannerHome
       }
     },
     products: [
@@ -55,10 +56,11 @@ class App extends Component {
     return (
       <Fragment>
         <Layout>
-          <Home
+          {/* <Home
             banner={this.state.banner.home}
             products={this.state.products}
-          />
+          /> */}
+          <Contact banner={this.state.banner.home} />
         </Layout>
       </Fragment>
     );
