@@ -1,28 +1,27 @@
 .ContactForm {
   margin: 0 auto;
-  padding: 5em 0;
+  padding: 3em 15px;
   max-width: 1140px;
   h2 {
     font-size: 1.75rem;
     font-weight: normal;
-    margin-bottom: .3em;
+    margin-bottom: .7em;
+    text-align: center;
   }
   .wrapper {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
     grid-gap: 2em;
     margin: 0 auto;
   }
   form {
     display: grid;
-    grid-gap: 1em;
-    justify-self: end;
+    grid-gap: 1.5em;
     border: 1px solid #eee;
-    padding: 3em;
+    padding: 2em;
     .nameGroup {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      grid-gap: 2em;
+      grid-gap: 1.5em;
     }
     label {
       color: #000;
@@ -33,7 +32,7 @@
       border: 1px solid #ced4da;
       border-radius: 0.25rem;
       font-size: 1rem;
-      margin-top: 0.5em;
+      margin-top: 0.7em;
       padding: .7em 1em;
       width: 100%;
     }
@@ -72,6 +71,48 @@
     p {
       color: #8c92a0;
       font-size: 1rem;
+      line-height: 1.7em;
     }
+  }
+}
+
+@media (min-width: 600px) {
+  .ContactForm {
+    form {
+      justify-self: center;
+    }
+    .addresses {
+      justify-self: center;
+    } 
+  }
+}
+
+@media (min-width: 992px) {
+  .ContactForm {
+    padding: 5em 30px;
+    h2 {
+      text-align: left;
+    }
+    .wrapper {
+      grid-template-columns: 1fr 1fr;
+    }
+    form {
+      justify-self: stretch;
+      grid-gap: 1em;
+      padding: 3em;
+      .nameGroup {
+        grid-template-columns: 1fr 1fr;
+        grid-gap: 2em;
+      }
+    }
+    .addresses {
+      justify-self: stretch;
+    }
+  }
+}
+
+@media (min-width: 1200px) {
+  .ContactForm {
+    padding: 5em 0;
   }
 }
