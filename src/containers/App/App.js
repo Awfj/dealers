@@ -56,11 +56,11 @@ class App extends Component {
     return (
       <Fragment>
         <Layout>
-          {/* <Home
+          <Home
             banner={this.state.banner.home}
             products={this.state.products}
-          /> */}
-          <Contact banner={this.state.banner.home} />
+          />
+          {/* <Contact banner={this.state.banner.home} /> */}
         </Layout>
       </Fragment>
     );

@@ -1,11 +1,14 @@
 import React from "react";
 
-import classes from './Collections.module.scss';
+import classes from "./Collections.module.scss";
+import ProductsPreview from "../../components/ProductsPreview/ProductsPreview";
 
-const collections = () => {
+const collections = props => {
   return (
     <div className={classes.Collections}>
       <h3>Collections</h3>
+
+      <ProductsPreview products={props.products} />
     </div>
   );
 };

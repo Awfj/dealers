@@ -13,7 +13,7 @@ const coverBlocks = props =>
           name={item.name}
           image={item.image}
         >
-          <Collections />
+          <Collections products={props.products} />
         </CoverBlock>
       );
     } else {

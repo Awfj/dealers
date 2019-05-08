@@ -23,11 +23,12 @@ class Home extends Component {
     return (
       <Fragment>
         {/* <Banner banner={this.props.banner} /> */}
-        <ProductsPreview products={this.props.products} />
-        {/* <CoverBlocks
+        {/* <ProductsPreview products={this.props.products} /> */}
+        <CoverBlocks
           title={this.state.coverBlock.title}
           items={this.state.coverBlock.items}
-        /> */}
+          products={this.props.products}
+        />
       </Fragment>
     );
   }
