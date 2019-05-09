@@ -9,7 +9,7 @@ const header = (props) => {
     <div className={classes.wrapper}>
       <a className={classes.logo} href="/">Dealers</a>
       <nav>
-        <a href="/">Collection</a>
+        <a href="/" className={classes.test}>Collection</a>
         <a href="/">Shop</a>
         <a href="/">Catalogs</a>
         <a href="/">Contact</a>
@@ -18,6 +18,7 @@ const header = (props) => {
         <a href="/"><FontAwesomeIcon icon={['fas', 'search']} /></a>
         <a href="/"><FontAwesomeIcon icon={['far', 'heart']} /></a>
         <a href="/"><FontAwesomeIcon icon={['fas', 'shopping-bag']} /></a>
+        <button onClick={props.toggleSideDrawer}><FontAwesomeIcon icon={['fas', 'bars']} /></button>
       </div>
     </div>
     </header>

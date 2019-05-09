@@ -1,0 +1,12 @@
+.sideDrawer {
+  border: 1px solid red;
+  transition: transform .3s ease-in-out;
+}
+
+.open {
+  transform: translateX(0);
+}
+
+.close {
+  transform: translateX(100%);
+}
