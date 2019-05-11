@@ -5,41 +5,42 @@
     padding: 0.5em 15px;
     display: grid;
     grid-template-columns: 1fr auto;
+    align-items: center;
     max-width: 1140px;
     margin: 0 auto;
   }
   a,
   button {
     background-color: #f9f9f9;
-    padding: 0.5em;
     display: inline-block;
   }
   .logo {
     justify-self: start;
   }
-  nav {
-    justify-self: center;
-    display: none;
-    a {
-      font-size: 0.938rem;
-      text-transform: uppercase;
-      color: #25262a;
-      transition: 0.2s all ease-in-out;
-      &:hover {
-        color: #207dff;
-      }
-    }
-  }
+  
   .icons {
     justify-self: end;
     a {
       margin-right: 0.2em;
     }
+    button {
+      cursor: pointer;
+    }
     a,
     button {
       color: #000;
       font-size: 1.2rem;
+      padding: 0.3em;
     }
+  }
+}
+
+.navigation {
+  justify-self: center;
+  display: none;
+  a {
+    font-size: 0.938rem;
+    text-transform: uppercase;
   }
 }
 
@@ -49,16 +50,16 @@
       grid-template-columns: auto auto auto;
       padding: 2em 0;
     }
-    a {
-      padding: 1em;
-    }
-    nav {
-      display: initial;
-    }
     .icons {
       button {
         display: none;
       }
+    }
+  }
+  .navigation {
+    display: initial;
+    a {
+      padding: 1em;
     }
   }
 }
