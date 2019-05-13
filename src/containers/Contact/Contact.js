@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 
 import Banner from "../../components/Banner/Banner";
-import ContactForm from "../../components/ContactForm/ContactForm";
+import Form from "../../components/pages/contact/Form/Form";
 
 class Contact extends Component {
   state = {
@@ -16,7 +16,7 @@ class Contact extends Component {
     return (
       <div>
         {/* <Banner banner={props.banner} /> */}
-        <ContactForm addresses={this.state.addresses} />
+        <Form addresses={this.state.addresses} />
       </div>
     );
   }

@@ -3,10 +3,10 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 
-import Header from "../../components/Header/Header";
+import Header from "../../components/layout/Header/Header";
 // import Footer from "../../components/Footer/Footer";
 // import Home from "../Home/Home";
-import ProductDetails from "../../components/ProductDetails/ProductDetails";
+import ProductDetails from "../ProductDetails/ProductDetails";
 // import Contact from "../Contact/Contact";
 import bannerHome from "../../assets/images/banner/banner-home.png";
 import product_1 from "../../assets/images/products/product_1.jpg";

@@ -1,6 +1,6 @@
 import React from "react";
 
-import classes from "./ContactForm.module.scss";
+import classes from "./Form.module.scss";
 
 const contactForm = props => {
   return (
