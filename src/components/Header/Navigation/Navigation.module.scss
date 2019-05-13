@@ -2,7 +2,9 @@
   a {
     color: #25262a;
     transition: 0.2s all ease-in-out;
-    &:hover {
+    &:hover,
+    &:active,
+    &.active {
       color: #207dff;
     }
   }

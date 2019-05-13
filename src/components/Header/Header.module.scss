@@ -16,8 +16,13 @@
   }
   .logo {
     justify-self: start;
+    color: #000;
+    font-size: 20px;
+    font-weight: bold;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
   }
-  
+
   .icons {
     justify-self: end;
     a {
@@ -31,6 +36,9 @@
       color: #000;
       font-size: 1.2rem;
       padding: 0.3em;
+    }
+    .cartFull {
+      color: #207dff;
     }
   }
 }
@@ -61,5 +69,11 @@
     a {
       padding: 1em;
     }
+  }
+}
+
+@media (min-width: 600px) {
+  .logo {
+    font-size: 22px;
   }
 }
