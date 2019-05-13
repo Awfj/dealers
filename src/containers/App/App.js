@@ -4,14 +4,15 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 
 import Header from "../../components/layout/Header/Header";
-// import Footer from "../../components/Footer/Footer";
+// import Footer from "../../components/layout/Footer/Footer";
 // import Home from "../Home/Home";
-import ProductDetails from "../ProductDetails/ProductDetails";
+import Shop from '../Shop/Shop';
+// import ProductDetails from "../ProductDetails/ProductDetails";
 // import Contact from "../Contact/Contact";
 import bannerHome from "../../assets/images/banner/banner-home.png";
-import product_1 from "../../assets/images/products/product_1.jpg";
-import product_2 from "../../assets/images/products/product_2.jpg";
-import product_3 from "../../assets/images/products/product_3.jpg";
+import product_1 from "../../assets/images/products/product-1.png";
+import product_2 from "../../assets/images/products/product-2.png";
+import product_3 from "../../assets/images/products/product-3.png";
 
 library.add(fas, far);
 
@@ -35,7 +36,7 @@ class App extends Component {
         {
           id: 2,
           name: "Marc Jacobs Bag",
-          price: "9.50",
+          price: "19.50",
           image: product_2,
           description:
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus aspernatur accusantium aliquid pariatur delectus itaque praesentium repellendus! Accusamus velit, obcaecati cupiditate voluptatem corrupti molestiae dicta itaque non. Ipsam, explicabo at."
@@ -43,7 +44,7 @@ class App extends Component {
         {
           id: 3,
           name: "The Belt",
-          price: "9.50",
+          price: "29.50",
           image: product_3,
           description:
             "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo sequi accusamus quisquam, delectus distinctio ad omnis similique dolorum pariatur provident enim. Deleniti suscipit provident sed quam doloribus, amet tempora numquam."
@@ -72,14 +73,15 @@ class App extends Component {
     return (
       <Fragment>
         <Header cart={this.state.cart} />
-        <ProductDetails
+        {/* <ProductDetails
           clicked={this.cartHandler}
           products={this.state.collections.products}
-        />
+        /> */}
         {/* <Home
           banner={this.state.collections}
           products={this.state.collections.products}
         /> */}
+        <Shop products={this.state.collections.products} />
         {/* <Contact banner={this.state.collections} /> */}
         {/* <Footer /> */}
       </Fragment>
