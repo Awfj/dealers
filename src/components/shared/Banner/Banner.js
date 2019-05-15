@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./Banner.module.scss";
-import Button from '../UI/Button/Button';
+import Button from '../Button/Button';
 
 const banner = props => {
   return (

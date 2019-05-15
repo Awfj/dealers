@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Banner from "../../components/Banner/Banner";
+// import Banner from "../../components/shared/Banner/Banner";
 import Form from "../../components/pages/contact/Form/Form";
 
 class Contact extends Component {

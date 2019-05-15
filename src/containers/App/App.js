@@ -1,14 +1,15 @@
 import React, { Component, Fragment } from "react";
+import { Route, Switch } from "react-router-dom";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 
 import Header from "../../components/layout/Header/Header";
 // import Footer from "../../components/layout/Footer/Footer";
-// import Home from "../Home/Home";
-import Shop from '../Shop/Shop';
+import Home from "../Home/Home";
+import Shop from "../Shop/Shop";
 // import ProductDetails from "../ProductDetails/ProductDetails";
-// import Contact from "../Contact/Contact";
+import Contact from "../Contact/Contact";
 import bannerHome from "../../assets/images/banner/banner-home.png";
 import product_1 from "../../assets/images/products/product-1.png";
 import product_2 from "../../assets/images/products/product-2.png";
@@ -73,16 +74,27 @@ class App extends Component {
     return (
       <Fragment>
         <Header cart={this.state.cart} />
+        <Switch>
+          <Route
+            path="/"
+            exact
+            render={() => (
+              <Home
+                banner={this.state.collections}
+                products={this.state.collections.products}
+              />
+            )}
+          />
+          <Route
+            path="/shop"
+            render={() => <Shop products={this.state.collections.products} />}
+          />
+          <Route path="/contact" render={() => <Contact banner={this.state.collections} />} />
+        </Switch>
         {/* <ProductDetails
           clicked={this.cartHandler}
           products={this.state.collections.products}
         /> */}
-        {/* <Home
-          banner={this.state.collections}
-          products={this.state.collections.products}
-        /> */}
-        <Shop products={this.state.collections.products} />
-        {/* <Contact banner={this.state.collections} /> */}
         {/* <Footer /> */}
       </Fragment>
     );

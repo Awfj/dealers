@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import classes from "./Header.module.scss";
@@ -30,7 +31,10 @@ class Header extends Component {
           close={this.sideDrawerCloseHandler}
         />
         <div className={classes.wrapper}>
-          <a className={classes.logo} href="/">Dealers</a>
+          <Link to="/" className={classes.logo}>
+            Dealers
+          </Link>
+
           <Navigation navHeader={classes.navigation} />
 
           <div className={classes.icons}>
@@ -40,12 +44,12 @@ class Header extends Component {
             <a href="/">
               <FontAwesomeIcon icon={["far", "heart"]} />
             </a>
-            <a href="/" className={cartClasses}>
+            <Link to="/cart" className={cartClasses}>
               <FontAwesomeIcon
                 icon={["fas", "shopping-bag"]}
                 className={classes.cart}
               />
-            </a>
+            </Link>
             <button onClick={this.sideDrawerOpenHandler}>
               <FontAwesomeIcon icon={["fas", "bars"]} />
             </button>

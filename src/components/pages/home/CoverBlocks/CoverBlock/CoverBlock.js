@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./CoverBlock.module.scss";
-import Button from "../../UI/Button/Button";
+import Button from "../../../../shared/Button/Button";
 
 const coverBlock = props => (
   <div>

@@ -1,14 +1,14 @@
 import React from "react";
+import { NavLink } from 'react-router-dom';
 
 import classes from './Navigation.module.scss';
 
 const navigation = (props) => {
   return (
     <nav className={[props.navHeader, props.navSideDrawer, classes.navigation].join(' ')}>
-      <a href="/">Collection</a>
-      <a href="/">Shop</a>
-      <a href="/">Catalogs</a>
-      <a href="/">Contact</a>
+      <NavLink to='/' exact>Collecion</NavLink>
+      <NavLink to='/shop'>Shop</NavLink>
+      <NavLink to='/contact'>Contact</NavLink>
     </nav>
   );
 };

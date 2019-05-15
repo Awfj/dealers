@@ -1,7 +1,7 @@
 import React from "react";
 
 import classes from "./Collections.module.scss";
-import ProductsPreview from "../../components/ProductsPreview/ProductsPreview";
+import ProductsPreview from "../../../shared/ProductsPreview/ProductsPreview";
 
 const collections = props => {
   return (

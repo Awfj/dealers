@@ -14,7 +14,6 @@ const productsSearch = props => {
 
   return (
     <div className={classes.search}>
-    {console.log(props.products)}
       <section>
         <header>
           <h2>Shop All</h2>
