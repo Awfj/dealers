@@ -52,8 +52,3 @@ ul {
   margin: 0 auto;
   padding: 0 16px;
 } */
-
-.active {
-  color: red !important;
-  border: 1px solid red;
-}

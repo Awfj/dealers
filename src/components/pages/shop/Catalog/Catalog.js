@@ -2,16 +2,15 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import ProductsPreview from "../../../shared/ProductsPreview/ProductsPreview";
-import classes from "./Search.module.scss";
+import classes from "./Catalog.module.scss";
 
 const productsSearch = props => {
-  let test = <ProductsPreview products={props.products} />;
-  let test2 = props.products;
+  let test = <ProductsPreview collections={props.collections} />;
+  // let test2 = props.products;
 
-  if(props.checkState) {
-    test = <ProductsPreview products={test2} />;
-  }
-
+  // if(props.checkState) {
+  //   test = <ProductsPreview />;
+  // }
   return (
     <div className={classes.search}>
       <section>

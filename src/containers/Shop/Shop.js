@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 
-import Search from '../../components/pages/shop/Search/Search';
+import Catalog from '../../components/pages/shop/Catalog/Catalog';
 
 class Shop extends Component {
   state = {
@@ -12,9 +12,10 @@ class Shop extends Component {
   }
 
   render() {
+    // console.log(this.props)
     return (
       <div>
-        <Search checkbox={this.checkboxHandle} checkState={this.state.checkbox} products={this.props.products} />
+        <Catalog checkbox={this.checkboxHandle} checkState={this.state.checkbox} collections={this.props.collections} />
       </div>
     )
   }

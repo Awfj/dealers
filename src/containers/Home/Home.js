@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 
-import CoverBlocks from "../../components/pages/home/CoverBlocks/CoverBlocks";
+// import CoverBlocks from "../../components/pages/home/CoverBlocks/CoverBlocks";
 import Banner from "../../components/shared/Banner/Banner";
 import ProductsPreview from '../../components/shared/ProductsPreview/ProductsPreview';
 
@@ -23,12 +23,12 @@ class Home extends Component {
     return (
       <Fragment>
         <Banner banner={this.props.banner} />
-        <ProductsPreview products={this.props.products} />
-        <CoverBlocks
+        <ProductsPreview collections={this.props.collections} />
+        {/* <CoverBlocks
           title={this.state.coverBlock.title}
           items={this.state.coverBlock.items}
           products={this.props.products}
-        />
+        /> */}
       </Fragment>
     );
   }

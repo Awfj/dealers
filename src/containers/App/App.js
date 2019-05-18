@@ -8,8 +8,9 @@ import Header from "../../components/layout/Header/Header";
 // import Footer from "../../components/layout/Footer/Footer";
 import Home from "../Home/Home";
 import Shop from "../Shop/Shop";
-// import ProductDetails from "../ProductDetails/ProductDetails";
+import ProductDetails from "../ProductDetails/ProductDetails";
 import Contact from "../Contact/Contact";
+import Cart from "../Cart/Cart";
 import bannerHome from "../../assets/images/banner/banner-home.png";
 import product_1 from "../../assets/images/products/product-1.png";
 import product_2 from "../../assets/images/products/product-2.png";
@@ -54,11 +55,12 @@ class App extends Component {
     },
     cart: {
       full: false,
-      products: 0
+      products: []
     }
   };
 
   cartHandler = () => {
+    console.log(this.history);
     // let cart = { ...this.state.cart };
     // cart.full = true;
     // this.setState({ cart });
@@ -66,9 +68,19 @@ class App extends Component {
       cart: {
         ...prevState.cart,
         full: true
+        // products: this.state.cart.products.push(arg)
       }
     }));
   };
+  // componentWillMount () {
+  //   const query = new URLSearchParams( this.props.location.search );
+  //   console.log(query)
+  // }
+
+  // componentDidUpdate() {
+  //   // console.log(this.cartHandler)
+  //   console.log(this.props)
+  // }
 
   render() {
     return (
@@ -76,25 +88,40 @@ class App extends Component {
         <Header cart={this.state.cart} />
         <Switch>
           <Route
+            path="/shop"
+            render={() => <Shop collections={this.state.collections} />}
+          />
+          <Route
+            path="/contact"
+            render={() => <Contact banner={this.state.collections} />}
+          />
+          <Route
+            path="/cart"
+            render={props => (
+              <Cart collections={this.state.collections} {...props} />
+            )}
+          />
+          <Route
+            path="/details/:productId"
+            render={props => (
+              <ProductDetails
+                clicked={this.cartHandler}
+                products={this.state.collections.products}
+                {...props}
+              />
+            )}
+          />
+          <Route
             path="/"
             exact
             render={() => (
               <Home
                 banner={this.state.collections}
-                products={this.state.collections.products}
+                collections={this.state.collections}
               />
             )}
           />
-          <Route
-            path="/shop"
-            render={() => <Shop products={this.state.collections.products} />}
-          />
-          <Route path="/contact" render={() => <Contact banner={this.state.collections} />} />
         </Switch>
-        {/* <ProductDetails
-          clicked={this.cartHandler}
-          products={this.state.collections.products}
-        /> */}
         {/* <Footer /> */}
       </Fragment>
     );
