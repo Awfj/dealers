@@ -5,7 +5,7 @@ import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
 
 import Header from "../../components/layout/Header/Header";
-// import Footer from "../../components/layout/Footer/Footer";
+import Footer from "../../components/layout/Footer/Footer";
 import Home from "../Home/Home";
 import Shop from "../Shop/Shop";
 import ProductDetails from "../ProductDetails/ProductDetails";
@@ -59,28 +59,32 @@ class App extends Component {
     }
   };
 
-  cartHandler = () => {
-    console.log(this.history);
+  cartHandler = (arg) => {
     // let cart = { ...this.state.cart };
     // cart.full = true;
     // this.setState({ cart });
+    
+    let products = this.state.cart.products;
+    products.push(arg);
     this.setState(prevState => ({
       cart: {
         ...prevState.cart,
-        full: true
-        // products: this.state.cart.products.push(arg)
+        full: true,
+        products: products
       }
     }));
   };
-  // componentWillMount () {
-  //   const query = new URLSearchParams( this.props.location.search );
-  //   console.log(query)
-  // }
 
-  // componentDidUpdate() {
-  //   // console.log(this.cartHandler)
-  //   console.log(this.props)
-  // }
+  removeFromCartHandler = (arg) => {
+    let products = this.state.cart.products;
+    products.pop(arg);
+    this.setState(prevState => ({
+      cart: {
+        ...prevState.cart,
+        products: products
+      }
+    }));
+  }
 
   render() {
     return (
@@ -98,7 +102,7 @@ class App extends Component {
           <Route
             path="/cart"
             render={props => (
-              <Cart collections={this.state.collections} {...props} />
+              <Cart collections={this.state.collections} cartState={this.state.cart} clicked={this.removeFromCartHandler} {...props} />
             )}
           />
           <Route
@@ -122,7 +126,7 @@ class App extends Component {
             )}
           />
         </Switch>
-        {/* <Footer /> */}
+        <Footer />
       </Fragment>
     );
   }

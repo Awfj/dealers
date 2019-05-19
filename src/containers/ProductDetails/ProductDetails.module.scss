@@ -1,0 +1,38 @@
+.productDetails {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 2em;
+  margin: 0 auto;
+  padding: 4em 0;
+  width: 1140px;
+  img {
+    border: 1px solid #eee;
+    width: 500px;
+  }
+  h2 {
+    font-size: 2rem;
+    font-weight: normal;
+    margin-bottom: .3em;
+  }
+  p {
+    color: #8c92a0;
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 1em;
+  }
+  button {
+    background-color: #207dff;
+    border-radius: 3.2px;
+    color: white;
+    padding: 1.5em;
+    text-transform: uppercase;
+    transition: .2s all ease-in-out;
+    &:hover {
+      background-color: #0068f9;
+    }
+  }
+  .price {
+    color: #207dff;
+    font-size: 1.5em;
+  }
+}

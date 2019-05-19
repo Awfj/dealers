@@ -44,7 +44,7 @@ const footer = () => {
       </div>
       <p className={classes.copyright}>
         Copyright ©2019 All rights reserved | This template is made with{" "}
-        <FontAwesomeIcon icon={["fas", "heart"]} /> by <a target="_blank" rel="noopener" href="https://colorlib.com/">Colorlib</a>
+        <FontAwesomeIcon icon={["fas", "heart"]} /> by <a target="_blank" rel="noopener noreferrer" href="https://colorlib.com/">Colorlib</a>
       </p>
     </footer>
   );
