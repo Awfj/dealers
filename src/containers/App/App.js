@@ -59,20 +59,16 @@ class App extends Component {
     }
   };
 
-  cartHandler = arg => {
-    // let cart = { ...this.state.cart };
-    // cart.full = true;
-    // this.setState({ cart });
-
-    let products = this.state.cart.products;
-    products.push(arg);
+  addToCartHandler = productId => {
+    const products = this.state.cart.products;
+    products.push(productId);
     this.setState(prevState => ({
       cart: {
         ...prevState.cart,
-        full: true,
         products: products
       }
     }));
+    this.cartIconHandler();
   };
 
   removeFromCartHandler = addedProductId => {
@@ -85,6 +81,18 @@ class App extends Component {
         products: products
       }
     }));
+    this.cartIconHandler();
+  };
+
+  cartIconHandler = () => {
+    let cart = { ...this.state.cart };
+    if (this.state.cart.products.length === 0) {
+      cart.full = false;
+      this.setState({ cart });
+    } else {
+      cart.full = true;
+      this.setState({ cart });
+    }
   };
 
   render() {
@@ -115,7 +123,7 @@ class App extends Component {
             path="/details/:productId"
             render={props => (
               <ProductDetails
-                clicked={this.cartHandler}
+                clicked={this.addToCartHandler}
                 products={this.state.collections.products}
                 {...props}
               />
