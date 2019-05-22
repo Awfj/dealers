@@ -59,11 +59,11 @@ class App extends Component {
     }
   };
 
-  cartHandler = (arg) => {
+  cartHandler = arg => {
     // let cart = { ...this.state.cart };
     // cart.full = true;
     // this.setState({ cart });
-    
+
     let products = this.state.cart.products;
     products.push(arg);
     this.setState(prevState => ({
@@ -75,16 +75,17 @@ class App extends Component {
     }));
   };
 
-  removeFromCartHandler = (arg) => {
-    let products = this.state.cart.products;
-    products.pop(arg);
+  removeFromCartHandler = addedProductId => {
+    const products = this.state.cart.products;
+    const id = products.findIndex(id => (+id === addedProductId ? id : null));
+    products.splice(id, 1);
     this.setState(prevState => ({
       cart: {
         ...prevState.cart,
         products: products
       }
     }));
-  }
+  };
 
   render() {
     return (
@@ -102,7 +103,12 @@ class App extends Component {
           <Route
             path="/cart"
             render={props => (
-              <Cart collections={this.state.collections} cartState={this.state.cart} clicked={this.removeFromCartHandler} {...props} />
+              <Cart
+                collections={this.state.collections}
+                cartState={this.state.cart}
+                clicked={this.removeFromCartHandler}
+                {...props}
+              />
             )}
           />
           <Route

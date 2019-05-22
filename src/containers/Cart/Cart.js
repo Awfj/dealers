@@ -3,7 +3,6 @@ import React from "react";
 import classes from "./Cart.module.scss";
 
 const cart = props => {
-  console.log(props)
   if (props.cartState.products.length >= 1) {
     return (
       <div className={classes.cart}>
@@ -28,7 +27,7 @@ const cart = props => {
                     <p>${product.price}</p>
                   </div>
                   <div className={classes.cell}>
-                    <button onClick={() => props.clicked(props.match.params.productId)}>Remove</button>
+                    <button onClick={() => props.clicked(product.id)}>Remove</button>
                   </div>
                 </div>
               );
@@ -40,7 +39,7 @@ const cart = props => {
       </div>
     );
   } else {
-    return null;
+    return <h1>Your Cart is empty</h1>;
   }
 };
 
