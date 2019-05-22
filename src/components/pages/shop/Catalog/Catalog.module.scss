@@ -1,4 +1,4 @@
-.search {
+.catalog {
   display: grid;
   grid-template-columns: auto auto;
   grid-gap: 1.5em;
@@ -8,6 +8,7 @@
   h2 {
     font-size: 1.25em;
     font-weight: normal;
+    margin-left: 15px;
   }
   header {
     display: grid;
@@ -63,6 +64,14 @@
   form {
     div {
       margin-bottom: .7em;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .catalog {
+    h2 {
+      margin-left: 50px;
     }
   }
 }

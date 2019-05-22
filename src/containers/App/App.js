@@ -102,7 +102,7 @@ class App extends Component {
         <Switch>
           <Route
             path="/shop"
-            render={() => <Shop collections={this.state.collections} />}
+            render={(props) => <Shop collections={this.state.collections} {...props} />}
           />
           <Route
             path="/contact"

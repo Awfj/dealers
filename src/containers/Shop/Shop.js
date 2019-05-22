@@ -1,24 +1,30 @@
-import React, {Component} from 'react'
+import React, { Component } from "react";
 
-import Catalog from '../../components/pages/shop/Catalog/Catalog';
+import Catalog from "../../components/pages/shop/Catalog/Catalog";
 
 class Shop extends Component {
   state = {
-    checkbox: false
-  }
+    checkbox: false,
+    sortPrices: [10, 20, 30]
+  };
 
   checkboxHandle = () => {
-    this.setState({checkbox: true})
-  }
+    this.setState({ checkbox: !this.state.checkbox });
+  };
 
   render() {
-    // console.log(this.props)
     return (
       <div>
-        <Catalog checkbox={this.checkboxHandle} checkState={this.state.checkbox} collections={this.props.collections} />
+        <Catalog
+          url={this.props.match.url}
+          sortPrices={this.state.sortPrices}
+          checkbox={this.checkboxHandle}
+          checkState={this.state.checkbox}
+          collections={this.props.collections}
+        />
       </div>
-    )
+    );
   }
 }
 
-export default Shop
+export default Shop;

@@ -38,12 +38,12 @@ class Header extends Component {
           <Navigation navHeader={classes.navigation} />
 
           <div className={classes.icons}>
-            <a href="/">
+            {/* <a href="/">
               <FontAwesomeIcon icon={["fas", "search"]} />
             </a>
             <a href="/">
               <FontAwesomeIcon icon={["far", "heart"]} />
-            </a>
+            </a> */}
             <Link to="/cart" className={cartClasses}>
               <FontAwesomeIcon
                 icon={["fas", "shopping-bag"]}

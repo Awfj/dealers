@@ -1,6 +1,6 @@
 .BannerCollection {
   text-align: center;
-  padding-top: 4em;
+  padding: 4em 15px 0;
   background-color: #f9f9f9;
   display: grid;
   grid-gap: 1em;
@@ -39,8 +39,25 @@
     color: #6c757d;
     text-decoration: line-through;
   }
+  a {
+    padding: 0.75em 1.875em;
+    font-size: 0.8125em;
+    text-transform: uppercase;
+    transition: 0.2s all ease-in-out;
+    background: black;
+    color: white;
+    &:hover {
+      opacity: 0.75;
+    }
+  }
   img {
     width: auto;
     max-height: 600px;
+  }
+}
+
+@media (min-width: 768px) {
+  .BannerCollection {
+    padding: 4em 50px 0;
   }
 }

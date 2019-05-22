@@ -1,7 +1,7 @@
 import React from "react";
+import {Link} from 'react-router-dom';
 
 import classes from "./Banner.module.scss";
-import Button from '../Button/Button';
 
 const banner = props => {
   return (
@@ -10,11 +10,11 @@ const banner = props => {
       <div className={classes.leftBlock}>
         <h2>{props.banner.name}</h2>
         <h4>{props.banner.type}</h4>
-        <div className={classes.prices}>
+        {/* <div className={classes.prices}>
           <p className={classes.price}>{props.banner.price}</p>
           <p className={classes.discountPrice}>{props.banner.discountPrice}</p>
-        </div>
-        <Button btnType="CoverBlock">Shop Now</Button>
+        </div> */}
+        <Link to='/shop'>Shop Now</Link>
       </div>
 
       <div className={classes.rightBlock}>

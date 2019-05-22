@@ -23,9 +23,7 @@ const footer = () => {
             Mountain View, San Francisco, California, USA
           </p>
           <p>
-            <a href="/">
-              <FontAwesomeIcon icon={["fas", "phone"]} /> +2 392 3929 210
-            </a>
+            <FontAwesomeIcon icon={["fas", "phone"]} /> +2 392 3929 210
           </p>
 
           <p>
@@ -44,7 +42,14 @@ const footer = () => {
       </div>
       <p className={classes.copyright}>
         Copyright ©2019 All rights reserved | This template is made with{" "}
-        <FontAwesomeIcon icon={["fas", "heart"]} /> by <a target="_blank" rel="noopener noreferrer" href="https://colorlib.com/">Colorlib</a>
+        <FontAwesomeIcon icon={["fas", "heart"]} /> by{" "}
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href="https://colorlib.com/"
+        >
+          Colorlib
+        </a>
       </p>
     </footer>
   );
