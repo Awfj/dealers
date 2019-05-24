@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 
 // import CoverBlocks from "../../components/pages/home/CoverBlocks/CoverBlocks";
-import Banner from "../../components/shared/Banner/Banner";
+// import Banner from "../../components/shared/Banner/Banner";
 import ProductsPreview from '../../components/shared/ProductsPreview/ProductsPreview';
 
 // import bannerHome from "../../assets/images/banner/banner-home.png";
@@ -22,7 +22,7 @@ class Home extends Component {
   render() {
     return (
       <Fragment>
-        <Banner banner={this.props.banner} />
+        {/* <Banner banner={this.props.banner} /> */}
         <ProductsPreview collections={this.props.collections} />
         {/* <CoverBlocks
           title={this.state.coverBlock.title}

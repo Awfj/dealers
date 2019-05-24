@@ -6,7 +6,7 @@ import ProductPreview from "./ProductPreview/ProductPreview";
 const productsPreview = props => {
   let body = null;
 
-  if (props.url === "/shop" && props.sortPricesCheck.includes(true)) {
+  if (props.url === "/dealers/shop" && props.sortPricesCheck.includes(true)) {
     body = props.foundProducts.map(product => (
       <ProductPreview
         id={product.id}

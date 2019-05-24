@@ -14,7 +14,7 @@ const banner = props => {
           <p className={classes.price}>{props.banner.price}</p>
           <p className={classes.discountPrice}>{props.banner.discountPrice}</p>
         </div> */}
-        <Link to='/shop'>Shop Now</Link>
+        <Link to='/dealers/shop'>Shop Now</Link>
       </div>
 
       <div className={classes.rightBlock}>

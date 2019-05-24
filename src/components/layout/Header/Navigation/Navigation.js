@@ -6,9 +6,9 @@ import classes from './Navigation.module.scss';
 const navigation = (props) => {
   return (
     <nav className={[props.navHeader, props.navSideDrawer, classes.navigation].join(' ')}>
-      <NavLink activeClassName={classes.active} to='/' exact>Collecion</NavLink>
-      <NavLink activeClassName={classes.active} to='/shop'>Shop</NavLink>
-      <NavLink activeClassName={classes.active} to='/contact'>Contact</NavLink>
+      <NavLink activeClassName={classes.active} to='/dealers/' exact>Collecion</NavLink>
+      <NavLink activeClassName={classes.active} to='/dealers/shop'>Shop</NavLink>
+      <NavLink activeClassName={classes.active} to='/dealers/contact'>Contact</NavLink>
     </nav>
   );
 };

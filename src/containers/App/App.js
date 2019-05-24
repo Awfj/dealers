@@ -101,15 +101,15 @@ class App extends Component {
         <Header cart={this.state.cart} />
         <Switch>
           <Route
-            path="/shop"
+            path="/dealers/shop"
             render={(props) => <Shop collections={this.state.collections} {...props} />}
           />
           <Route
-            path="/contact"
+            path="/dealers/contact"
             render={() => <Contact banner={this.state.collections} />}
           />
           <Route
-            path="/cart"
+            path="/dealers/cart"
             render={props => (
               <Cart
                 collections={this.state.collections}
@@ -120,7 +120,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/details/:productId"
+            path="/dealers/details/:productId"
             render={props => (
               <ProductDetails
                 clicked={this.addToCartHandler}
@@ -130,7 +130,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/"
+            path="/dealers"
             exact
             render={() => (
               <Home

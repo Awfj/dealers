@@ -31,7 +31,7 @@ class Header extends Component {
           close={this.sideDrawerCloseHandler}
         />
         <div className={classes.wrapper}>
-          <Link to="/" className={classes.logo}>
+          <Link to="/dealers/" className={classes.logo}>
             Dealers
           </Link>
 
@@ -44,7 +44,7 @@ class Header extends Component {
             <a href="/">
               <FontAwesomeIcon icon={["far", "heart"]} />
             </a> */}
-            <Link to="/cart" className={cartClasses}>
+            <Link to="/dealers/cart" className={cartClasses}>
               <FontAwesomeIcon
                 icon={["fas", "shopping-bag"]}
                 className={classes.cart}
