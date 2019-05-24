@@ -4,12 +4,29 @@ import Catalog from "../../components/pages/shop/Catalog/Catalog";
 
 class Shop extends Component {
   state = {
-    checkbox: false,
-    sortPrices: [10, 20, 30]
+    sortPrices: {
+      10: false,
+      20: false,
+      30: false
+    },
+    foundProducts: [],
   };
 
-  checkboxHandle = () => {
-    this.setState({ checkbox: !this.state.checkbox });
+  checkboxHandle = sortPrice => {
+    const products = this.props.collections.products;
+    const sortPrices = { ...this.state.sortPrices };
+    const keysSortPrices = [];
+
+    sortPrices[sortPrice] = !sortPrices[sortPrice];
+    const arrSortPrices = Object.entries(sortPrices);
+
+    arrSortPrices.forEach(sortPrice => (sortPrice[1] ? keysSortPrices.push(sortPrice[0]) : null));
+    const minSortPrice = Math.min(...keysSortPrices);
+
+    this.setState({
+      sortPrices: sortPrices,
+      foundProducts: products.filter(product => product.price < minSortPrice)
+    });
   };
 
   render() {
@@ -17,9 +34,10 @@ class Shop extends Component {
       <div>
         <Catalog
           url={this.props.match.url}
-          sortPrices={this.state.sortPrices}
+          foundProducts={this.state.foundProducts}
           checkbox={this.checkboxHandle}
-          checkState={this.state.checkbox}
+          sortPrices={Object.keys(this.state.sortPrices)}
+          sortPricesCheck={Object.values(this.state.sortPrices)}
           collections={this.props.collections}
         />
       </div>

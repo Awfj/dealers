@@ -4,13 +4,10 @@ import classes from "./ProductsPreview.module.scss";
 import ProductPreview from "./ProductPreview/ProductPreview";
 
 const productsPreview = props => {
-  const products = props.collections.products;
   let body = null;
-  let foundProducts = [];
-  foundProducts = products.filter(product => product.price < 10);
 
-  if (props.url === "/shop" && props.checkState) {
-    body = foundProducts.map(product => (
+  if (props.url === "/shop" && props.sortPricesCheck.includes(true)) {
+    body = props.foundProducts.map(product => (
       <ProductPreview
         id={product.id}
         key={product.id}
@@ -32,6 +29,7 @@ const productsPreview = props => {
       />
     ));
   }
+
   return <div className={classes.ProductsPreview}>{body}</div>;
 };
 
