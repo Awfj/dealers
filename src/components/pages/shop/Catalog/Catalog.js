@@ -40,6 +40,7 @@ const productsSearch = props => {
         <ProductsPreview
           foundProducts={props.foundProducts}
           url={props.url}
+          classes='catalog'
 
           sortPricesCheck={props.sortPricesCheck}
 

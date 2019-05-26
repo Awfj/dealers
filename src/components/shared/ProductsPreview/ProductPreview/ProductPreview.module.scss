@@ -3,7 +3,8 @@
   color: #000;
   img {
     margin: 0 auto;
-    max-width: 100%;
+    width: 100%;
+    max-width: 250px;
   }
   .info {
     text-align: center;
@@ -46,14 +47,6 @@
       .price {
         font-size: 1.5rem;
       }
-    }
-  }
-}
-
-@media (min-width: 1140px) {
-  .ProductPreview {
-    img {
-      max-width: 500px;
     }
   }
 }

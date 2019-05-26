@@ -1,7 +1,7 @@
 .Header {
   background-color: #f9f9f9;
   .wrapper {
-    border: 1px solid #000;
+    // border: 1px solid #000;
     padding: 0.5em 15px;
     display: grid;
     grid-template-columns: 1fr auto;
@@ -12,7 +12,6 @@
   a,
   button {
     background-color: #f9f9f9;
-    // display: inline-block;
   }
   .logo {
     justify-self: start;
@@ -52,6 +51,12 @@
   }
 }
 
+@media (min-width: 600px) {
+  .logo {
+    font-size: 22px;
+  }
+}
+
 @media (min-width: 768px) {
   .Header {
     .wrapper {
@@ -69,11 +74,5 @@
     a {
       padding: 1em;
     }
-  }
-}
-
-@media (min-width: 600px) {
-  .logo {
-    font-size: 22px;
   }
 }

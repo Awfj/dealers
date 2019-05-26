@@ -30,7 +30,7 @@ const productsPreview = props => {
     ));
   }
 
-  return <div className={classes.ProductsPreview}>{body}</div>;
+  return <div className={[classes.ProductsPreview, classes[props.classes]].join(' ')}>{body}</div>;
 };
 
 export default productsPreview;

@@ -1,13 +1,14 @@
 .productDetails {
   display: grid;
-  grid-template-columns: auto auto;
   grid-gap: 2em;
   margin: 0 auto;
-  padding: 4em 0;
-  width: 1140px;
+  padding: 2em 15px;
+  max-width: 1140px;
   img {
     border: 1px solid #eee;
-    width: 500px;
+    margin: 0 auto;
+    width: 100%;
+    max-width: 300px;
   }
   h2 {
     font-size: 2rem;
@@ -34,5 +35,15 @@
   .price {
     color: #207dff;
     font-size: 1.5em;
+  }
+}
+
+@media (min-width: 600px) {
+  .productDetails {
+    grid-template-columns: auto auto;
+    padding: 4em 15px;
+    img {
+      max-width: 400px;
+    }
   }
 }

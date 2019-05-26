@@ -1,20 +1,28 @@
 .cart {
   margin: 0 auto;
-  padding: 5em 0;
+  padding: 2em 15px 0;
   max-width: 1140px;
   img {
-    max-width: 150px;
+    max-width: 100px;
     margin: 0 auto;
   }
 }
 .table {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
+  grid-row-gap: 2em;
+}
+.product {
+  display: grid;
+  
   .cell {
     border: 1px solid #dee2e6;
     display: grid;
     justify-items: center;
     align-items: center;
+    padding: 0 15px;
+  }
+  .cell:not(:first-child) {
+    padding: 1em 15px;
   }
   button {
     background-color: #207dff;
@@ -25,6 +33,29 @@
     transition: .2s all ease-in-out;
     &:hover {
       background-color: #0068f9;
+    }
+  }
+}
+
+@media (min-width: 400px) {
+  .table {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 600px) {
+  .cart {
+    padding: 5em 15px;
+  }
+  .table {
+    grid-template-columns: 1fr;
+    grid-row-gap: 0;
+  }
+  .product {
+    grid-template-columns: repeat(2, 1fr) repeat(3, .5fr);
+    justify-content: stretch;
+    .cell:not(:first-child) {
+      padding: 0 15px;
     }
   }
 }

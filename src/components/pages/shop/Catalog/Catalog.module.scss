@@ -1,10 +1,13 @@
 .catalog {
   display: grid;
-  grid-template-columns: auto auto;
   grid-gap: 1.5em;
   margin: 0 auto;
-  padding: 5em 0;
+  padding: 2em 15px;
   max-width: 1140px;
+  aside {
+    grid-row-start: 1;
+    justify-self: start;
+  }
   h2 {
     font-size: 1.25em;
     font-weight: normal;
@@ -13,7 +16,7 @@
   header {
     display: grid;
     grid-template-columns: auto auto;
-    margin-bottom: 2.5em;
+    margin-bottom: 1.5em;
     .buttons {
       justify-self: end;
       button {
@@ -64,6 +67,15 @@
   form {
     div {
       margin-bottom: .7em;
+    }
+  }
+}
+
+@media (min-width: 600px) {
+  .catalog {
+    grid-template-columns: 1fr auto;
+    aside {
+      grid-row-start: auto;
     }
   }
 }

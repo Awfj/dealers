@@ -21,7 +21,7 @@ const sideDrawer = props => {
             <FontAwesomeIcon icon={["fas", "times"]} />
           </button>
         </div>
-        <Navigation navSideDrawer={classes.navigation} />
+        <Navigation navSideDrawer={classes.navigation} close={props.close} />
       </div>
     </Fragment>
   );
