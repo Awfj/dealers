@@ -59,40 +59,39 @@ class App extends Component {
     }
   };
 
-  addToCartHandler = productId => {
-    const products = this.state.cart.products;
-    products.push(productId);
-    this.setState(prevState => ({
-      cart: {
-        ...prevState.cart,
-        products: products
-      }
-    }));
-    this.cartIconHandler();
-  };
+  // test = () => {
+  //   const cart = { ...this.state.cart };
+  //   if (!cart.full && this.state.cart.products.length >= 0) {
+  //     cart.full = true;
+  //   }
+  //   this.setState({ cart });
+  //   console.log('asf')
+  // }
 
-  removeFromCartHandler = addedProductId => {
-    const products = this.state.cart.products;
-    const id = products.findIndex(id => (+id === addedProductId ? id : null));
-    products.splice(id, 1);
-    this.setState(prevState => ({
-      cart: {
-        ...prevState.cart,
-        products: products
-      }
-    }));
-    this.cartIconHandler();
-  };
+  // componentDidMount() {
+  //   this.test();
+  // }
 
-  cartIconHandler = () => {
-    let cart = { ...this.state.cart };
-    if (this.state.cart.products.length === 0) {
-      cart.full = false;
-      this.setState({ cart });
-    } else {
+  addToCartHandler = (id, quantity) => {
+    const cart = { ...this.state.cart };
+    let addedProducts = cart.products.concat({ id, quantity });
+    cart.products = addedProducts;
+    if (!cart.full && cart.products.length >= 0) {
       cart.full = true;
-      this.setState({ cart });
     }
+    this.setState({ cart });
+  };
+
+  removeFromCartHandler = addedProductIndex => {
+    const cart = { ...this.state.cart };
+    const products = cart.products.filter(
+      (_, index) => index !== addedProductIndex
+    );
+    cart.products = products;
+    if (cart.products.length === 0) {
+      cart.full = false;
+    }
+    this.setState({ cart });
   };
 
   render() {
@@ -101,8 +100,20 @@ class App extends Component {
         <Header cart={this.state.cart} />
         <Switch>
           <Route
+            path="/dealers"
+            exact
+            render={() => (
+              <Home
+                banner={this.state.collections}
+                collections={this.state.collections}
+              />
+            )}
+          />
+          <Route
             path="/dealers/shop"
-            render={(props) => <Shop collections={this.state.collections} {...props} />}
+            render={props => (
+              <Shop collections={this.state.collections} {...props} />
+            )}
           />
           <Route
             path="/dealers/contact"
@@ -123,19 +134,11 @@ class App extends Component {
             path="/dealers/details/:productId"
             render={props => (
               <ProductDetails
-                clicked={this.addToCartHandler}
+                addToCart={this.addToCartHandler}
                 products={this.state.collections.products}
+                increaseQuantity={this.increaseQuantityHandler}
+                decreaseQuantity={this.decreaseQuantityHandler}
                 {...props}
-              />
-            )}
-          />
-          <Route
-            path="/dealers"
-            exact
-            render={() => (
-              <Home
-                banner={this.state.collections}
-                collections={this.state.collections}
               />
             )}
           />

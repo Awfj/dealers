@@ -8,9 +8,9 @@ const cart = props => {
   if (props.cartState.products.length >= 1) {
     body = (
       <div className={classes.table}>
-        {props.cartState.products.map(id => {
+        {props.cartState.products.map((addedProduct, index) => {
           return props.collections.products.map(product => {
-            if (+id === product.id) {
+            if (+addedProduct.id === product.id) {
               return (
                 <div className={classes.product} key={product.id}>
                   <div className={classes.cell}>
@@ -20,13 +20,13 @@ const cart = props => {
                     <p>{product.name}</p>
                   </div>
                   <div className={classes.cell}>
-                    <p>1</p>
+                    <p>{addedProduct.quantity}</p>
                   </div>
                   <div className={classes.cell}>
-                    <p>${product.price}</p>
+                    <p>${+product.price * addedProduct.quantity}</p>
                   </div>
                   <div className={classes.cell}>
-                    <button onClick={() => props.clicked(product.id)}>
+                    <button onClick={() => props.clicked(index)}>
                       Remove
                     </button>
                   </div>

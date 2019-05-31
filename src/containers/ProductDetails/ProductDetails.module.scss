@@ -13,7 +13,7 @@
   h2 {
     font-size: 2rem;
     font-weight: normal;
-    margin-bottom: .3em;
+    margin-bottom: 0.3em;
   }
   p {
     color: #8c92a0;
@@ -21,20 +21,52 @@
     line-height: 1.7;
     margin-bottom: 1em;
   }
-  button {
+  .price {
+    color: #207dff;
+    font-size: 1.5em;
+  }
+  .productQuantity {
+    margin-bottom: 2em;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    justify-content: start;
+
+    button, span {
+      padding: 1em;
+      font-size: 1rem;
+    }
+    button {
+      border: 1px solid #207dff;
+      color: #207dff;
+      transition: .2s all ease-in-out;
+      &:hover {
+        background-color: #207dff;
+        color: white;
+      }
+    }
+    button:first-child {
+      border-top-left-radius: 7px;
+      border-bottom-left-radius: 7px;
+    }
+    button:last-child {
+      border-top-right-radius: 7px;
+      border-bottom-right-radius: 7px;
+    }
+    span {
+      border: 1px solid #ced4da;
+      color: #495057;
+    }
+  }
+  .btnCart {
     background-color: #207dff;
     border-radius: 3.2px;
     color: white;
     padding: 1.5em;
     text-transform: uppercase;
-    transition: .2s all ease-in-out;
+    transition: 0.2s all ease-in-out;
     &:hover {
       background-color: #0068f9;
     }
-  }
-  .price {
-    color: #207dff;
-    font-size: 1.5em;
   }
 }
 
