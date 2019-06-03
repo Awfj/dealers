@@ -59,19 +59,6 @@ class App extends Component {
     }
   };
 
-  // test = () => {
-  //   const cart = { ...this.state.cart };
-  //   if (!cart.full && this.state.cart.products.length >= 0) {
-  //     cart.full = true;
-  //   }
-  //   this.setState({ cart });
-  //   console.log('asf')
-  // }
-
-  // componentDidMount() {
-  //   this.test();
-  // }
-
   addToCartHandler = (id, quantity) => {
     const cart = { ...this.state.cart };
     let addedProducts = cart.products.concat({ id, quantity });
@@ -136,8 +123,6 @@ class App extends Component {
               <ProductDetails
                 addToCart={this.addToCartHandler}
                 products={this.state.collections.products}
-                increaseQuantity={this.increaseQuantityHandler}
-                decreaseQuantity={this.decreaseQuantityHandler}
                 {...props}
               />
             )}

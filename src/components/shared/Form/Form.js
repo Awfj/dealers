@@ -12,16 +12,17 @@ class Form extends Component {
         config: this.props.formData[key]
       });
     }
-    // console.log(this.props)
 
-    let submitted = null;
-    if(this.props.formState.failedSubmition) {
-      submitted = this.props.notification;
-    } 
+    let notification = null;
+    if(this.props.formState.failedSubmit) {
+      notification = this.props.notification;
+    } else if (this.props.formState.isSubmitted) {
+      notification = this.props.notification;
+    }
+
     return (
       <form onSubmit={this.props.submitHandler}>
         {formElementsArray.map(formElement => {
-          // console.log(formElement);
           return (
             <Input
               key={formElement.id}
@@ -37,8 +38,8 @@ class Form extends Component {
             />
           );
         })}
-        <button>Send Message</button>
-        {submitted}
+        {this.props.submitButton}
+        {notification}
       </form>
     );
   }

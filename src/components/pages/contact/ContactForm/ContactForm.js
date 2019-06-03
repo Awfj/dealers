@@ -71,10 +71,10 @@ class ContactForm extends Component {
       }
     },
     formState: {
-      failedSubmition: false
+      failedSubmit: false,
+      isValid: false,
+      isSubmitted: false
     },
-    formIsValid: false,
-    formIsSubmitted: false,
     loading: false,
     addresses: [
       {
@@ -95,13 +95,17 @@ class ContactForm extends Component {
   submitHandler = event => {
     event.preventDefault();
 
-    const formState = {...this.state.formState};
-    
-    if(this.state.formIsValid) {
-      this.setState({formIsSubmitted: true})
+    const formState = { ...this.state.formState };
+
+    if (this.state.formState.isValid) {
+      formState.isSubmitted = true;
+      formState.failedSubmit = false;
+
+      this.setState({ formState });
     } else {
-      formState.failedSubmition = true;
-      this.setState({formState})
+      formState.failedSubmit = true;
+
+      this.setState({ formState });
     }
   };
 
@@ -135,6 +139,7 @@ class ContactForm extends Component {
   changeHandler = (event, inputIdentifier) => {
     const formData = { ...this.state.formData };
     const formElement = { ...formData[inputIdentifier] };
+    const formState = { ...this.state.formState };
 
     formElement.value = event.target.value;
     formElement.valid = this.checkValidity(
@@ -144,20 +149,30 @@ class ContactForm extends Component {
     formElement.touched = true;
     formData[inputIdentifier] = formElement;
 
-    let formIsValid = true;
+    let isValid = true;
     for (let inputIdentifier in formData) {
-      formIsValid = formData[inputIdentifier].valid && formIsValid;
+      isValid = formData[inputIdentifier].valid && isValid;
     }
+    formState.isValid = isValid;
 
-    this.setState({ formData, formIsValid });
+    this.setState({ formData, formState });
   };
 
   render() {
+    const submitButton = <button>Send Message</button>
     let notification = null;
-    if(this.state.formIsSubmitted && this.state.formIsValid) {
-      notification = <p className={classes.success}>We'll contact you.</p>
-    } else if (this.state.formState.failedSubmition && !this.state.formIsValid) {
-      notification = <p className={classes.error}>All required fields must be filled in.</p>
+    if (
+      this.state.formState.isSubmitted &&
+      this.state.formState.isValid
+    ) {
+      notification = <p className={classes.success}>We'll contact you.</p>;
+    } else if (
+      this.state.formState.failedSubmit &&
+      !this.state.formState.isValid
+    ) {
+      notification = (
+        <p className={classes.error}>All required fields must be filled in.</p>
+      );
     }
 
     return (
@@ -168,10 +183,9 @@ class ContactForm extends Component {
             submitHandler={this.submitHandler}
             formData={this.state.formData}
             changeHandler={this.changeHandler}
-            formIsSubmitted={this.state.formIsSubmitted}
-            formIsValid={this.state.formIsValid}
             formState={this.state.formState}
             notification={notification}
+            submitButton={submitButton}
           />
 
           <div className={classes.addresses}>

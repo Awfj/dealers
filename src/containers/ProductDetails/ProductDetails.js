@@ -9,35 +9,27 @@ class ProductDetails extends Component {
   };
 
   increaseQuantityHandler = () => {
-    const quantity = this.state.quantity; 
-    this.setState({quantity: quantity + 1})
+    const quantity = this.state.quantity;
+    this.setState({ quantity: quantity + 1 });
   };
 
   decreaseQuantityHandler = () => {
     const quantity = this.state.quantity;
-    this.setState({quantity: quantity <= 1 ? quantity : quantity - 1})
+    this.setState({ quantity: quantity <= 1 ? quantity : quantity - 1 });
   };
 
   render() {
+    const currentProduct = this.props.products.find(
+      product => product.id === +this.props.match.params.productId
+    );
+
     return (
       <div className={classes.productDetails}>
-        <img
-          src={this.props.products[this.props.match.params.productId - 1].image}
-          alt={this.props.products[this.props.match.params.productId - 1].name}
-        />
+        <img src={currentProduct.image} alt={currentProduct.name} />
         <section>
-          <h2>
-            {this.props.products[this.props.match.params.productId - 1].name}
-          </h2>
-          <p>
-            {
-              this.props.products[this.props.match.params.productId - 1]
-                .description
-            }
-          </p>
-          <p className={classes.price}>
-            ${this.props.products[this.props.match.params.productId - 1].price}
-          </p>
+          <h2>{currentProduct.name}</h2>
+          <p>{currentProduct.description}</p>
+          <p className={classes.price}>${currentProduct.price}</p>
           <div className={classes.productQuantity}>
             <button onClick={this.decreaseQuantityHandler}>
               <FontAwesomeIcon icon={["fas", "minus"]} />
