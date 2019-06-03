@@ -7,8 +7,8 @@ class ContactForm extends Component {
   state = {
     formData: {
       firstName: {
-        label: "First Name",
         elementType: "input",
+        label: "First Name*",
         elementConfig: {
           type: "text"
         },
@@ -20,8 +20,8 @@ class ContactForm extends Component {
         }
       },
       lastName: {
-        label: "Last Name",
         elementType: "input",
+        label: "Last Name*",
         elementConfig: {
           type: "text"
         },
@@ -31,9 +31,51 @@ class ContactForm extends Component {
         validation: {
           required: true
         }
+      },
+      email: {
+        elementType: "input",
+        label: "Email*",
+        elementConfig: {
+          type: "text"
+        },
+        valid: false,
+        touched: false,
+        value: "",
+        validation: {
+          required: true,
+          isEmail: true
+        }
+      },
+      subject: {
+        elementType: "input",
+        label: "Subject*",
+        elementConfig: {
+          type: "text"
+        },
+        valid: false,
+        touched: false,
+        value: "",
+        validation: {
+          required: true
+        }
+      },
+      message: {
+        elementType: "textarea",
+        label: "Message*",
+        valid: false,
+        touched: false,
+        value: "",
+        validation: {
+          required: true
+        }
       }
     },
+    formState: {
+      failedSubmition: false
+    },
     formIsValid: false,
+    formIsSubmitted: false,
+    loading: false,
     addresses: [
       {
         city: "New York",
@@ -50,25 +92,18 @@ class ContactForm extends Component {
     ]
   };
 
-  componentWillMount() {
-    this.addRequired();
-  }
-
-  formSubmitHandler = event => {
+  submitHandler = event => {
     event.preventDefault();
-  };
 
-  addRequired() {
-    const formData = { ...this.state.formData };
-
-    for (let inputIdentifier in formData) {
-      const formElement = { ...formData[inputIdentifier] };
-      
-      formElement.label += '*';
-      formData[inputIdentifier] = formElement;
+    const formState = {...this.state.formState};
+    
+    if(this.state.formIsValid) {
+      this.setState({formIsSubmitted: true})
+    } else {
+      formState.failedSubmition = true;
+      this.setState({formState})
     }
-    this.setState({formData});
-  }
+  };
 
   checkValidity(value, rules) {
     let isValid = true;
@@ -77,7 +112,21 @@ class ContactForm extends Component {
       return true;
     }
     if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
+      isValid = value.trim() !== "" && isValid;
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
+    }
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid;
+    }
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid;
     }
 
     return isValid;
@@ -95,8 +144,6 @@ class ContactForm extends Component {
     formElement.touched = true;
     formData[inputIdentifier] = formElement;
 
-    // console.log(formData);
-
     let formIsValid = true;
     for (let inputIdentifier in formData) {
       formIsValid = formData[inputIdentifier].valid && formIsValid;
@@ -106,46 +153,26 @@ class ContactForm extends Component {
   };
 
   render() {
-    // console.log(this.state.formData);
+    let notification = null;
+    if(this.state.formIsSubmitted && this.state.formIsValid) {
+      notification = <p className={classes.success}>We'll contact you.</p>
+    } else if (this.state.formState.failedSubmition && !this.state.formIsValid) {
+      notification = <p className={classes.error}>All required fields must be filled in.</p>
+    }
+
     return (
       <section className={classes.form}>
         <h2>Get in Touch</h2>
         <div className={classes.wrapper}>
           <Form
-            submitHandler={this.formSubmitHandler}
+            submitHandler={this.submitHandler}
             formData={this.state.formData}
             changeHandler={this.changeHandler}
+            formIsSubmitted={this.state.formIsSubmitted}
+            formIsValid={this.state.formIsValid}
+            formState={this.state.formState}
+            notification={notification}
           />
-          {/* <form>
-            <div className={classes.nameGroup}>
-              <div>
-                <label htmlFor="firstName">First Name</label>
-                <input id="firstName" type="text" />
-              </div>
-  
-              <div>
-                <label htmlFor="lastName">Last Name</label>
-                <input id="lastName" type="text" />
-              </div>
-            </div>
-  
-            <div>
-              <label htmlFor="email">Email</label>
-              <input id="email" type="email" />
-            </div>
-  
-            <div>
-              <label htmlFor="subject">Subject</label>
-              <input id="subject" type="text" />
-            </div>
-  
-            <div>
-              <label htmlFor="message">Message</label>
-              <textarea id="message" cols="30" rows="7" />
-            </div>
-  
-            <button>Send Message</button>
-          </form> */}
 
           <div className={classes.addresses}>
             {this.state.addresses.map((address, index) => {

@@ -13,6 +13,11 @@ class Form extends Component {
       });
     }
     // console.log(this.props)
+
+    let submitted = null;
+    if(this.props.formState.failedSubmition) {
+      submitted = this.props.notification;
+    } 
     return (
       <form onSubmit={this.props.submitHandler}>
         {formElementsArray.map(formElement => {
@@ -33,6 +38,7 @@ class Form extends Component {
           );
         })}
         <button>Send Message</button>
+        {submitted}
       </form>
     );
   }
