@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import classes from "./Header.module.scss";
@@ -21,7 +22,7 @@ class Header extends Component {
 
   render() {
     let cartClasses = "";
-    if (this.props.cart.full) {
+    if (this.props.cartIsFull) {
       cartClasses = classes.cartFull;
     }
     return (
@@ -60,4 +61,10 @@ class Header extends Component {
   }
 }
 
-export default Header;
+const mapStateToProps = state => {
+  return {
+    // cartIsFull: state.cart.full
+  }
+}
+
+export default connect(mapStateToProps)(Header);

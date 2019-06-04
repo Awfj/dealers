@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import classes from "./ProductDetails.module.scss";
@@ -56,4 +57,10 @@ class ProductDetails extends Component {
   }
 }
 
-export default ProductDetails;
+const mapStateToProps = state => {
+  return {
+    products: state.collections.products
+  };
+};
+
+export default connect(mapStateToProps)(ProductDetails);

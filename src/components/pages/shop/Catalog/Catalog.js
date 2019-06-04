@@ -41,10 +41,7 @@ const productsSearch = props => {
           foundProducts={props.foundProducts}
           url={props.url}
           classes='catalog'
-
           sortPricesCheck={props.sortPricesCheck}
-
-          collections={props.collections}
         />
       </section>
 

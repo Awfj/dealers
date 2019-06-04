@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from 'react-redux';
 
 import classes from "./ProductsPreview.module.scss";
 import ProductPreview from "./ProductPreview/ProductPreview";
@@ -33,4 +34,10 @@ const productsPreview = props => {
   return <div className={[classes.ProductsPreview, classes[props.classes]].join(' ')}>{body}</div>;
 };
 
-export default productsPreview;
+const mapStateToProps = state => {
+  return {
+    collections: state.collections
+  }
+}
+
+export default connect(mapStateToProps)(productsPreview);

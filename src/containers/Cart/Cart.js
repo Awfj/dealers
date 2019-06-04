@@ -1,14 +1,15 @@
 import React from "react";
+import { connect } from 'react-redux';
 
 import classes from "./Cart.module.scss";
 
 const cart = props => {
   let body = null;
 
-  if (props.cartState.products.length >= 1) {
+  if (props.productsInCart.length >= 1) {
     body = (
       <div className={classes.table}>
-        {props.cartState.products.map((addedProduct, index) => {
+        {props.productsInCart.map((addedProduct, index) => {
           return props.collections.products.map(product => {
             if (+addedProduct.id === product.id) {
               return (
@@ -46,4 +47,11 @@ const cart = props => {
   return <div className={classes.cart}>{body}</div>;
 };
 
-export default cart;
+const mapStateToProps = state => {
+  return {
+    collections: state.collections,
+    // productsInCart: state.cart.products,
+  }
+}
+
+export default connect(mapStateToProps)(cart);

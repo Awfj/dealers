@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from 'react-redux';
 
 import Catalog from "../../components/pages/shop/Catalog/Catalog";
 
@@ -38,11 +39,16 @@ class Shop extends Component {
           checkbox={this.checkboxHandle}
           sortPrices={Object.keys(this.state.sortPrices)}
           sortPricesCheck={Object.values(this.state.sortPrices)}
-          collections={this.props.collections}
         />
       </div>
     );
   }
 }
 
-export default Shop;
+const mapStateToProps = state => {
+  return {
+    collections: state.collections
+  }
+}
+
+export default connect(mapStateToProps)(Shop);

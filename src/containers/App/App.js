@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import * as actionTypes from '../../store/actions';
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -11,48 +13,11 @@ import Shop from "../Shop/Shop";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import Contact from "../Contact/Contact";
 import Cart from "../Cart/Cart";
-import bannerHome from "../../assets/images/banner/banner-home.png";
-import product_1 from "../../assets/images/products/product-1.png";
-import product_2 from "../../assets/images/products/product-2.png";
-import product_3 from "../../assets/images/products/product-3.png";
 
 library.add(fas, far);
 
 class App extends Component {
   state = {
-    collections: {
-      name: "Madewell",
-      type: "Summer Collection",
-      price: "1.999",
-      discountPrice: "1.499",
-      image: bannerHome,
-      products: [
-        {
-          id: 1,
-          name: "The Shoe",
-          price: "9.50",
-          image: product_1,
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur, voluptas? Cum expedita natus et fugit non sapiente adipisci distinctio minima mollitia, molestias possimus nulla assumenda, odit sequi a quidem est?"
-        },
-        {
-          id: 2,
-          name: "Marc Jacobs Bag",
-          price: "19.50",
-          image: product_2,
-          description:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus aspernatur accusantium aliquid pariatur delectus itaque praesentium repellendus! Accusamus velit, obcaecati cupiditate voluptatem corrupti molestiae dicta itaque non. Ipsam, explicabo at."
-        },
-        {
-          id: 3,
-          name: "The Belt",
-          price: "29.50",
-          image: product_3,
-          description:
-            "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Illo sequi accusamus quisquam, delectus distinctio ad omnis similique dolorum pariatur provident enim. Deleniti suscipit provident sed quam doloribus, amet tempora numquam."
-        }
-      ]
-    },
     cart: {
       full: false,
       products: []
@@ -84,34 +49,16 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header cart={this.state.cart} />
+        <Header cartIsFull={this.state.cart.full} />
         <Switch>
-          <Route
-            path="/dealers"
-            exact
-            render={() => (
-              <Home
-                banner={this.state.collections}
-                collections={this.state.collections}
-              />
-            )}
-          />
-          <Route
-            path="/dealers/shop"
-            render={props => (
-              <Shop collections={this.state.collections} {...props} />
-            )}
-          />
-          <Route
-            path="/dealers/contact"
-            render={() => <Contact banner={this.state.collections} />}
-          />
+          <Route path="/dealers" exact render={() => <Home />} />
+          <Route path="/dealers/shop" render={props => <Shop {...props} />} />
+          <Route path="/dealers/contact" render={() => <Contact />} />
           <Route
             path="/dealers/cart"
             render={props => (
               <Cart
-                collections={this.state.collections}
-                cartState={this.state.cart}
+                productsInCart={this.state.cart.products}
                 clicked={this.removeFromCartHandler}
                 {...props}
               />
@@ -120,11 +67,7 @@ class App extends Component {
           <Route
             path="/dealers/details/:productId"
             render={props => (
-              <ProductDetails
-                addToCart={this.addToCartHandler}
-                products={this.state.collections.products}
-                {...props}
-              />
+              <ProductDetails addToCart={this.addToCartHandler} {...props} />
             )}
           />
         </Switch>
@@ -134,4 +77,18 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapStateToProps = state => {
+  return {
+    collections: state.collections,
+    cart: state.cart
+  };
+};
+
+const mapDispatchTpProps = dispatch => {
+  return {
+    onProductAdded: () => dispatch({type: actionTypes.ADD_TO_CART}),
+    onProductRemoved: () => dispatch({type: actionTypes.REMOVE_FROM_CART})
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchTpProps)(App);
