@@ -1,9 +1,10 @@
-import * as actionTypes from "./actions";
+import * as actionTypes from "../actions/actionTypes";
+// import { updateObject } from "../utility";
 
-import bannerHome from "../assets/images/banner/banner-home.png";
-import product_1 from "../assets/images/products/product-1.png";
-import product_2 from "../assets/images/products/product-2.png";
-import product_3 from "../assets/images/products/product-3.png";
+import bannerHome from "../../assets/images/banner/banner-home.png";
+import product_1 from "../../assets/images/products/product-1.png";
+import product_2 from "../../assets/images/products/product-2.png";
+import product_3 from "../../assets/images/products/product-3.png";
 
 const initialState = {
   collections: {
@@ -44,41 +45,42 @@ const initialState = {
     isFull: false
   }
 };
+const addToCart = (state, action) => {
+  // console.log(state.cart.products)
+  const updatedProducts = [...state.cart.products].concat({
+    id: action.id,
+    quantity: action.quantity
+  });
+  return {
+    ...state,
+    cart: {
+      ...state.cart,
+      products: updatedProducts,
+      isFull: state.cart.products.length > 0 ? true : false
+    }
+  };
+};
+
+const removeFromCart = (state, action) => {
+  const updatedProducts = [...state.cart.products].filter(
+    (_, index) => index !== action.addedProductIndex
+  );
+  return {
+    ...state,
+    cart: {
+      ...state.cart,
+      products: updatedProducts,
+      isFull: state.cart.products.length === 0 ? false : true
+    }
+  };
+};
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case actionTypes.ADD_TO_CART:
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          products: [...state.cart.products].concat({
-            id: action.id,
-            quantity: action.quantity
-          }),
-          // isFull: (!state.cart.isFull && state.cart.products.length >= 0) ? true : false,
-          // isFull: true
-        }
-      };
+      return addToCart(state, action);
     case actionTypes.REMOVE_FROM_CART:
-      return {
-        ...state,
-        cart: {
-          ...state.cart,
-          products: [...state.cart.products].filter(
-            (_, index) => index !== action.addedProductIndex
-          ),
-          // isFull: [...state.cart.products].length === 0 ? false : true
-        }
-      };
-    case actionTypes.TOGGLE_CART_ICON:
-      console.log(state.cart.products)
-      return {
-        ...state,
-        cart: {
-          isFull: (!state.cart.isFull && state.cart.products.length >= 0) ? true : false
-        }
-      }
+      return removeFromCart(state, action);
     default:
       return state;
   }

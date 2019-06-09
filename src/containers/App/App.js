@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import * as actionTypes from "../../store/actions";
+import * as actions from '../../store/actions/index';
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -17,6 +18,20 @@ import Cart from "../Cart/Cart";
 library.add(fas, far);
 
 class App extends Component {
+  // state = {
+  //   cartIsFull: false
+  // }
+
+  // toggleCartIcon = () => {
+  //   console.log(this.props.cart.products)
+  //   if(this.props.cart.products.length > 0) {
+  //     this.setState({cartIsFull: true})
+  //   }
+  // }
+  // componentDidMount() {
+  //   this.toggleCartIcon()
+  // }
+
   // addToCartHandler = (id, quantity) => {
   //   const cart = { ...this.state.cart };
   //   let addedProducts = cart.products.concat({ id, quantity });
@@ -62,7 +77,8 @@ class App extends Component {
           <Route
             path="/dealers/details/:productId"
             render={props => (
-              <ProductDetails addToCart={this.props.onAddToCart} {...props} />
+              // <ProductDetails addToCart={this.props.onAddToCart} {...props} />
+              <ProductDetails addToCart={this.props.onTest} {...props} />
             )}
           />
         </Switch>
@@ -82,10 +98,11 @@ const mapStateToProps = state => {
 const mapDispatchTpProps = dispatch => {
   return {
     onAddToCart: (id, quantity) =>
-      dispatch({ type: actionTypes.ADD_TO_CART, id, quantity }),
+      dispatch(actions.addToCart(id, quantity)),
     onRemoveFromCart: addedProductIndex =>
-      dispatch({ type: actionTypes.REMOVE_FROM_CART, addedProductIndex }),
-    onToggleCartIcon: () => dispatch({ type: actionTypes.TOGGLE_CART_ICON })
+      dispatch(actions.removeFromCart(addedProductIndex)),
+    onTest: (id, quantity) => dispatch(actions.test(id, quantity))
+    // onToggleCartIcon: () => dispatch({ type: actionTypes.TOGGLE_CART_ICON })
   };
 };
 
