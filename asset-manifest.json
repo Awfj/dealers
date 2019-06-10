@@ -1,19 +1,15 @@
 {
   "files": {
-    "main.css": "/dealers/static/css/main.a2cace74.chunk.css",
-    "main.js": "/dealers/static/js/main.c5ed945f.chunk.js",
-    "main.js.map": "/dealers/static/js/main.c5ed945f.chunk.js.map",
+    "main.css": "/dealers/static/css/main.24a8b6a3.chunk.css",
+    "main.js": "/dealers/static/js/main.0c882d4c.chunk.js",
+    "main.js.map": "/dealers/static/js/main.0c882d4c.chunk.js.map",
     "runtime~main.js": "/dealers/static/js/runtime~main.6ae02ff1.js",
     "runtime~main.js.map": "/dealers/static/js/runtime~main.6ae02ff1.js.map",
-    "static/js/2.042b1b95.chunk.js": "/dealers/static/js/2.042b1b95.chunk.js",
-    "static/js/2.042b1b95.chunk.js.map": "/dealers/static/js/2.042b1b95.chunk.js.map",
+    "static/js/2.1fdcec73.chunk.js": "/dealers/static/js/2.1fdcec73.chunk.js",
+    "static/js/2.1fdcec73.chunk.js.map": "/dealers/static/js/2.1fdcec73.chunk.js.map",
     "index.html": "/dealers/index.html",
-    "precache-manifest.95a9794bb3e30a667634367fca51cec5.js": "/dealers/precache-manifest.95a9794bb3e30a667634367fca51cec5.js",
+    "precache-manifest.21c3376df27c5b6bf504ef2c06b56798.js": "/dealers/precache-manifest.21c3376df27c5b6bf504ef2c06b56798.js",
     "service-worker.js": "/dealers/service-worker.js",
-    "static/css/main.a2cace74.chunk.css.map": "/dealers/static/css/main.a2cace74.chunk.css.map",
-    "static/media/banner-home.png": "/dealers/static/media/banner-home.584046f0.png",
-    "static/media/product-1.png": "/dealers/static/media/product-1.f3437c81.png",
-    "static/media/product-2.png": "/dealers/static/media/product-2.a6934bb1.png",
-    "static/media/product-3.png": "/dealers/static/media/product-3.4bf9a050.png"
+    "static/css/main.24a8b6a3.chunk.css.map": "/dealers/static/css/main.24a8b6a3.chunk.css.map"
   }
 }
