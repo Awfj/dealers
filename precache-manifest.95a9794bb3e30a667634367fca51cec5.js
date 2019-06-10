@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "264da7dc9419ab12ad76db6b6720794a",
+    "revision": "998187e90db0e04d964483dd75657796",
     "url": "/dealers/index.html"
   },
   {
-    "revision": "76b91e57768b6e9426cc",
-    "url": "/dealers/static/css/main.b0b46d8f.chunk.css"
+    "revision": "465496119c1fcf345e4f",
+    "url": "/dealers/static/css/main.a2cace74.chunk.css"
   },
   {
-    "revision": "827d00236c8b1479c3ed",
-    "url": "/dealers/static/js/2.29c5ad0d.chunk.js"
+    "revision": "986c502f097f13c20f81",
+    "url": "/dealers/static/js/2.042b1b95.chunk.js"
   },
   {
-    "revision": "76b91e57768b6e9426cc",
-    "url": "/dealers/static/js/main.478afbff.chunk.js"
+    "revision": "465496119c1fcf345e4f",
+    "url": "/dealers/static/js/main.c5ed945f.chunk.js"
   },
   {
     "revision": "bb00f40d44f73bc5dd7a",
@@ -22,14 +22,6 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
     "revision": "584046f0e0789aeb89ed229177b61c46",
     "url": "/dealers/static/media/banner-home.584046f0.png"
-  },
-  {
-    "revision": "762c712cc02ab8d3d41fe54a54f9e56e",
-    "url": "/dealers/static/media/cover-block-1.762c712c.png"
-  },
-  {
-    "revision": "1b1436fc49fab02727bc0cf15d14bc69",
-    "url": "/dealers/static/media/cover-block-2.1b1436fc.png"
   },
   {
     "revision": "f3437c81804dd00374705b877b048181",
