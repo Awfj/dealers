@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 
+import * as actions from "../../store/actions/index";
 import classes from "./Cart.module.scss";
 
 const cart = props => {
@@ -10,7 +11,7 @@ const cart = props => {
     body = (
       <div className={classes.table}>
         {props.productsInCart.map((addedProduct, index) => {
-          return props.collections.products.map(product => {
+          return props.products.map(product => {
             if (+addedProduct.id === product.id) {
               return (
                 <div className={classes.product} key={product.id}>
@@ -27,7 +28,7 @@ const cart = props => {
                     <p>${+product.price * addedProduct.quantity}</p>
                   </div>
                   <div className={classes.cell}>
-                    <button onClick={() => props.clicked(index)}>
+                    <button onClick={() => props.onRemoveFromCart(index)}>
                       Remove
                     </button>
                   </div>
@@ -49,9 +50,16 @@ const cart = props => {
 
 const mapStateToProps = state => {
   return {
-    collections: state.collections,
-    // productsInCart: state.cart.products,
+    products: state.collections.products,
+    productsInCart: state.cart.products
   }
 }
 
-export default connect(mapStateToProps)(cart);
+const mapDispatchTpProps = dispatch => {
+  return {
+    onRemoveFromCart: addedProductIndex =>
+      dispatch(actions.removeFromCart(addedProductIndex))
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchTpProps)(cart);

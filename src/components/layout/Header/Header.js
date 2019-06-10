@@ -9,7 +9,7 @@ import Navigation from "./Navigation/Navigation";
 
 class Header extends Component {
   state = {
-    showSideDrawer: false
+    showSideDrawer: false,
   };
 
   sideDrawerOpenHandler = () => {
@@ -23,8 +23,9 @@ class Header extends Component {
   render() {
     let cartClasses = "";
     if (this.props.cartIsFull) {
-      cartClasses = classes.cartFull;
+      cartClasses = classes.cartIsFull;
     }
+    
     return (
       <header className={classes.Header}>
         <SideDrawer
@@ -63,7 +64,7 @@ class Header extends Component {
 
 const mapStateToProps = state => {
   return {
-    // cartIsFull: state.cart.full
+    cartIsFull: state.cart.isFull
   }
 }
 

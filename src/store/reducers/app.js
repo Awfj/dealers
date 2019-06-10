@@ -1,5 +1,4 @@
 import * as actionTypes from "../actions/actionTypes";
-// import { updateObject } from "../utility";
 
 import bannerHome from "../../assets/images/banner/banner-home.png";
 import product_1 from "../../assets/images/products/product-1.png";
@@ -46,32 +45,37 @@ const initialState = {
   }
 };
 const addToCart = (state, action) => {
-  // console.log(state.cart.products)
-  const updatedProducts = [...state.cart.products].concat({
+  const cart = { ...state.cart };
+  const updatedProducts = cart.products.concat({
     id: action.id,
     quantity: action.quantity
   });
+  cart.products = updatedProducts;
+
+  if (cart.products.length > 0) {
+    cart.isFull = true;
+  }
+
   return {
     ...state,
-    cart: {
-      ...state.cart,
-      products: updatedProducts,
-      isFull: state.cart.products.length > 0 ? true : false
-    }
+    cart
   };
 };
 
 const removeFromCart = (state, action) => {
-  const updatedProducts = [...state.cart.products].filter(
+  const cart = { ...state.cart };
+  const updatedProducts = cart.products.filter(
     (_, index) => index !== action.addedProductIndex
   );
+  cart.products = updatedProducts;
+
+  if (cart.products.length === 0) {
+    cart.isFull = false;
+  }
+
   return {
     ...state,
-    cart: {
-      ...state.cart,
-      products: updatedProducts,
-      isFull: state.cart.products.length === 0 ? false : true
-    }
+    cart
   };
 };
 

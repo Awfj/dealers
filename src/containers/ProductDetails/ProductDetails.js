@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
+import * as actions from "../../store/actions/index";
 import classes from "./ProductDetails.module.scss";
 
 class ProductDetails extends Component {
@@ -43,7 +45,7 @@ class ProductDetails extends Component {
           <button
             className={classes.btnCart}
             onClick={() =>
-              this.props.addToCart(
+              this.props.onAddToCart(
                 this.props.match.params.productId,
                 this.state.quantity
               )
@@ -63,4 +65,10 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(ProductDetails);
+const mapDispatchTpProps = dispatch => {
+  return {
+    onAddToCart: (id, quantity) => dispatch(actions.addToCart(id, quantity)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchTpProps)(ProductDetails);
