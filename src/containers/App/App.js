@@ -1,6 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
 
+import { connect } from "react-redux";
+import * as actions from "../../store/actions/index";
+
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { far } from "@fortawesome/free-regular-svg-icons";
@@ -16,6 +19,9 @@ import Cart from "../Cart/Cart";
 library.add(fas, far);
 
 class App extends Component {
+  componentDidMount() {
+    this.props.onInitCollections();
+  }
   render() {
     return (
       <Fragment>
@@ -36,4 +42,13 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchTpProps = dispatch => {
+  return {
+    onInitCollections: () => dispatch(actions.initCollections())
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchTpProps
+)(App);

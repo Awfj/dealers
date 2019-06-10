@@ -14,7 +14,7 @@ class Shop extends Component {
   };
 
   checkboxHandle = sortPrice => {
-    const products = this.props.collections.products;
+    const products = this.props.products;
     const sortPrices = { ...this.state.sortPrices };
     const keysSortPrices = [];
 
@@ -47,7 +47,7 @@ class Shop extends Component {
 
 const mapStateToProps = state => {
   return {
-    collections: state.collections
+    products: state.collections.products
   }
 }
 

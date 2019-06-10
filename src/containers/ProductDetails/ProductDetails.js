@@ -22,9 +22,13 @@ class ProductDetails extends Component {
   };
 
   render() {
-    const currentProduct = this.props.products.find(
-      product => product.id === +this.props.match.params.productId
-    );
+    let currentProduct = {};
+
+    if (this.props.products.length > 0) {
+      currentProduct = this.props.products.find(
+        product => product.id === +this.props.match.params.productId
+      );
+    }
 
     return (
       <div className={classes.productDetails}>

@@ -16,15 +16,28 @@ export const removeFromCart = addedProductIndex => {
   };
 };
 
-export const initProducts = () => {
+export const setCollections = collections => {
+  return {
+    type: actionTypes.SET_COLLECTIONS,
+    collections
+  };
+};
+
+export const getCollectionsFailed = () => {
+  return {
+    type: actionTypes.GET_COLLECTIONS_FAILED
+  };
+};
+
+export const initCollections = () => {
   return dispatch => {
     axios
-      .get("")
+      .get("https://dealers-df82e.firebaseio.com/collections.json")
       .then(response => {
-        dispatch();
+        dispatch(setCollections(response.data));
       })
       .catch(error => {
-        dispatch();
+        dispatch(getCollectionsFailed(error));
       });
   };
 };
