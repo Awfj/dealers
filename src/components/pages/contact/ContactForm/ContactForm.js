@@ -159,12 +159,9 @@ class ContactForm extends Component {
   };
 
   render() {
-    const submitButton = <button>Send Message</button>
+    const submitButton = <button>Send Message</button>;
     let notification = null;
-    if (
-      this.state.formState.isSubmitted &&
-      this.state.formState.isValid
-    ) {
+    if (this.state.formState.isSubmitted && this.state.formState.isValid) {
       notification = <p className={classes.success}>We'll contact you.</p>;
     } else if (
       this.state.formState.failedSubmit &&

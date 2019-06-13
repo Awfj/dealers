@@ -1,7 +1,6 @@
 import React from "react";
-import { connect } from 'react-redux';
+import { connect } from "react-redux";
 
-import * as actions from "../../store/actions/index";
 import classes from "./Cart.module.scss";
 
 const cart = props => {
@@ -52,14 +51,20 @@ const mapStateToProps = state => {
   return {
     products: state.collections.products,
     productsInCart: state.cart.products
-  }
-}
+  };
+};
 
 const mapDispatchTpProps = dispatch => {
   return {
     onRemoveFromCart: addedProductIndex =>
-      dispatch(actions.removeFromCart(addedProductIndex))
+      dispatch({
+        type: "REMOVE_FROM_CART",
+        addedProductIndex
+      })
   };
 };
 
-export default connect(mapStateToProps, mapDispatchTpProps)(cart);
+export default connect(
+  mapStateToProps,
+  mapDispatchTpProps
+)(cart);

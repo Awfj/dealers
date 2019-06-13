@@ -1,5 +1,3 @@
-import * as actionTypes from "../actions/actionTypes";
-
 const initialState = {
   collections: {
     products: []
@@ -10,6 +8,23 @@ const initialState = {
   },
   error: false
 };
+
+const reducer = (state = initialState, action) => {
+  switch (action.type) {
+    case "ADD_TO_CART":
+      return addToCart(state, action);
+    case "REMOVE_FROM_CART":
+      return removeFromCart(state, action);
+    case "SET_COLLECTIONS":
+      return setCollections(state, action);
+    case "GET_COLLECTIONS_FAILED":
+      return getCollectionsFailed(state, action);
+    default:
+      return state;
+  }
+};
+
+export default reducer;
 
 const addToCart = (state, action) => {
   const cart = { ...state.cart };
@@ -54,20 +69,3 @@ const setCollections = (state, action) => {
 const getCollectionsFailed = state => {
   return { ...state, error: true };
 };
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case actionTypes.ADD_TO_CART:
-      return addToCart(state, action);
-    case actionTypes.REMOVE_FROM_CART:
-      return removeFromCart(state, action);
-    case actionTypes.SET_COLLECTIONS:
-      return setCollections(state, action);
-    case actionTypes.GET_COLLECTIONS_FAILED:
-      return getCollectionsFailed(state, action);
-    default:
-      return state;
-  }
-};
-
-export default reducer;

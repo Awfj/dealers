@@ -52,6 +52,9 @@ class Header extends Component {
                 className={classes.cart}
               />
             </Link>
+            <Link to="/dealers/signup">
+              Sign Up
+            </Link>
             <button onClick={this.sideDrawerOpenHandler}>
               <FontAwesomeIcon icon={["fas", "bars"]} />
             </button>

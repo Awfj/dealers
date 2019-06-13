@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import * as actions from "../../store/actions/index";
 import classes from "./ProductDetails.module.scss";
 
 class ProductDetails extends Component {
@@ -71,8 +70,12 @@ const mapStateToProps = state => {
 
 const mapDispatchTpProps = dispatch => {
   return {
-    onAddToCart: (id, quantity) => dispatch(actions.addToCart(id, quantity)),
+    onAddToCart: (id, quantity) =>
+      dispatch({ type: "ADD_TO_CART", id, quantity })
   };
 };
 
-export default connect(mapStateToProps, mapDispatchTpProps)(ProductDetails);
+export default connect(
+  mapStateToProps,
+  mapDispatchTpProps
+)(ProductDetails);

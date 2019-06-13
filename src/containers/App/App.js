@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
+import axios from "axios";
 
 import { connect } from "react-redux";
-import * as actions from "../../store/actions/index";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -15,9 +15,10 @@ import Shop from "../Shop/Shop";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import Contact from "../Contact/Contact";
 import Cart from "../Cart/Cart";
+import SignUp from "../SignUp/SignUp";
 
 library.add(fas, far);
-
+// console.log(process.env.REACT_APP_API_KEY)
 class App extends Component {
   componentDidMount() {
     this.props.onInitCollections();
@@ -32,6 +33,10 @@ class App extends Component {
           <Route path="/dealers/contact" render={() => <Contact />} />
           <Route path="/dealers/cart" render={props => <Cart {...props} />} />
           <Route
+            path="/dealers/signup"
+            render={props => <SignUp {...props} />}
+          />
+          <Route
             path="/dealers/details/:productId"
             render={props => <ProductDetails {...props} />}
           />
@@ -44,7 +49,23 @@ class App extends Component {
 
 const mapDispatchTpProps = dispatch => {
   return {
-    onInitCollections: () => dispatch(actions.initCollections())
+    onInitCollections: () =>
+      dispatch(dispatch => {
+        axios
+          .get("https://dealers-df82e.firebaseio.com/collections.json")
+          .then(response => {
+            dispatch({
+              type: "SET_COLLECTIONS",
+              collections: response.data
+            });
+          })
+          .catch(error => {
+            dispatch({
+              type: "GET_COLLECTIONS_FAILED",
+              error
+            });
+          });
+      })
   };
 };
 

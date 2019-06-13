@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
 import Input from "./Input/Input";
 
@@ -14,7 +15,7 @@ class Form extends Component {
     }
 
     let notification = null;
-    if(this.props.formState.failedSubmit) {
+    if (this.props.formState.failedSubmit) {
       notification = this.props.notification;
     } else if (this.props.formState.isSubmitted) {
       notification = this.props.notification;
@@ -34,7 +35,9 @@ class Form extends Component {
               invalid={!formElement.config.valid}
               shouldValidate={formElement.config.validation}
               touched={formElement.config.touched}
-              changeHandler={(event) => this.props.changeHandler(event, formElement.id)}
+              changeHandler={event =>
+                this.props.changeHandler(event, formElement.id)
+              }
             />
           );
         })}
@@ -45,4 +48,13 @@ class Form extends Component {
   }
 }
 
-export default Form;
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmitForm: event => dispatch({ type: "SUBMIT_FORM", event })
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Form);
