@@ -1,8 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
-import axios from "axios";
-
+// import axios from "axios";
 import { connect } from "react-redux";
+import { initCollections } from "../../store/reducers/app";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -26,50 +26,68 @@ class App extends Component {
   render() {
     return (
       <Fragment>
-        <Header />
-        <Switch>
-          <Route path="/dealers" exact render={() => <Home />} />
-          <Route path="/dealers/shop" render={props => <Shop {...props} />} />
-          <Route path="/dealers/contact" render={() => <Contact />} />
-          <Route path="/dealers/cart" render={props => <Cart {...props} />} />
-          <Route
-            path="/dealers/signup"
-            render={props => <SignUp {...props} />}
-          />
-          <Route
-            path="/dealers/details/:productId"
-            render={props => <ProductDetails {...props} />}
-          />
-        </Switch>
+        <Header
+          cartIsFull={this.props.cartIsFull}
+          isSideDrawerOpen={this.props.isSideDrawerOpen}
+          openSideDrawer={this.props.onOpenSideDrawer}
+          closeSideDrawer={this.props.onCloseSideDrawer}
+        />
+        <main>
+          <Switch>
+            <Route
+              path="/dealers"
+              exact
+              render={() => <Home collections={this.props.collections} />}
+            />
+            <Route
+              path="/dealers/shop"
+              render={props => (
+                <Shop collections={this.props.collections} {...props} />
+              )}
+            />
+            <Route path="/dealers/contact" render={() => <Contact />} />
+            <Route
+              path="/dealers/cart"
+              render={props => (
+                <Cart products={this.props.products} {...props} />
+              )}
+            />
+            <Route
+              path="/dealers/signup"
+              render={props => <SignUp {...props} />}
+            />
+            <Route
+              path="/dealers/details/:productId"
+              render={props => (
+                <ProductDetails products={this.props.products} {...props} />
+              )}
+            />
+          </Switch>
+        </main>
         <Footer />
       </Fragment>
     );
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    collections: state.app.collections,
+    products: state.app.collections.products,
+    cartIsFull: state.app.cart.isFull,
+    isSideDrawerOpen: state.app.isSideDrawerOpen
+  };
+};
+
 const mapDispatchTpProps = dispatch => {
   return {
-    onInitCollections: () =>
-      dispatch(dispatch => {
-        axios
-          .get("https://dealers-df82e.firebaseio.com/collections.json")
-          .then(response => {
-            dispatch({
-              type: "SET_COLLECTIONS",
-              collections: response.data
-            });
-          })
-          .catch(error => {
-            dispatch({
-              type: "GET_COLLECTIONS_FAILED",
-              error
-            });
-          });
-      })
+    onInitCollections: () => dispatch(initCollections()),
+    onOpenSideDrawer: () => dispatch({ type: "OPEN_SIDE_DRAWER" }),
+    onCloseSideDrawer: () => dispatch({ type: "CLOSE_SIDE_DRAWER" })
   };
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchTpProps
 )(App);

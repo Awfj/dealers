@@ -18,7 +18,8 @@ const input = props => {
           id={props.id}
           {...props.elementConfig}
           value={props.value}
-          onChange={props.changeHandler}
+          // onChange={props.changeHandler}
+          onChange={props.onCheckValidity}
         />
       );
       break;

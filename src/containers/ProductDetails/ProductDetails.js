@@ -62,12 +62,6 @@ class ProductDetails extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    products: state.collections.products
-  };
-};
-
 const mapDispatchTpProps = dispatch => {
   return {
     onAddToCart: (id, quantity) =>
@@ -76,6 +70,6 @@ const mapDispatchTpProps = dispatch => {
 };
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchTpProps
 )(ProductDetails);

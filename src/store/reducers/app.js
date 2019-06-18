@@ -1,3 +1,5 @@
+import axios from "axios";
+
 const initialState = {
   collections: {
     products: []
@@ -6,6 +8,7 @@ const initialState = {
     products: [],
     isFull: false
   },
+  isSideDrawerOpen: false,
   error: false
 };
 
@@ -19,6 +22,10 @@ const reducer = (state = initialState, action) => {
       return setCollections(state, action);
     case "GET_COLLECTIONS_FAILED":
       return getCollectionsFailed(state, action);
+    case "OPEN_SIDE_DRAWER":
+      return openSideDrawer(state, action);
+    case "CLOSE_SIDE_DRAWER":
+      return closeSideDrawer(state, action);
     default:
       return state;
   }
@@ -68,4 +75,31 @@ const setCollections = (state, action) => {
 
 const getCollectionsFailed = state => {
   return { ...state, error: true };
+};
+
+export const initCollections = () => {
+  return dispatch => {
+    axios
+      .get("https://dealers-df82e.firebaseio.com/collections.json")
+      .then(response => {
+        dispatch({
+          type: "SET_COLLECTIONS",
+          collections: response.data
+        });
+      })
+      .catch(error => {
+        dispatch({
+          type: "GET_COLLECTIONS_FAILED",
+          error
+        });
+      });
+  };
+};
+
+const openSideDrawer = state => {
+  return { ...state, isSideDrawerOpen: true };
+};
+
+const closeSideDrawer = state => {
+  return { ...state, isSideDrawerOpen: false };
 };

@@ -38,10 +38,11 @@ const productsSearch = props => {
           </div>
         </header>
         <ProductsPreview
-          foundProducts={props.foundProducts}
           url={props.url}
-          classes='catalog'
+          collections={props.collections}
+          foundProducts={props.foundProducts}
           sortPricesCheck={props.sortPricesCheck}
+          classes='catalog'
         />
       </section>
 

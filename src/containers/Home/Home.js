@@ -22,7 +22,7 @@ class Home extends Component {
     return (
       <Fragment>
         {/* <Banner banner={this.props.collections} /> */}
-        <ProductsPreview />
+        <ProductsPreview collections={this.props.collections} />
         {/* <CoverBlocks
           title={this.state.coverBlock.title}
           items={this.state.coverBlock.items}
