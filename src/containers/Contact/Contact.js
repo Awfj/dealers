@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
+
+import { checkFormElementsValidity } from "../../store/reducers/form";
 
 // import Banner from "../../components/shared/Banner/Banner";
 import ContactForm from "../../components/pages/contact/ContactForm/ContactForm";
@@ -70,11 +73,7 @@ class Contact extends Component {
         }
       }
     },
-    formState: {
-      failedSubmit: false,
-      isValid: false,
-      isSubmitted: false
-    },
+    isFormValid: false,
     loading: false,
     addresses: [
       {
@@ -92,57 +91,13 @@ class Contact extends Component {
     ]
   };
 
-  submitHandler = event => {
-    event.preventDefault();
-
-    const formState = { ...this.state.formState };
-
-    if (this.state.formState.isValid) {
-      formState.isSubmitted = true;
-      formState.failedSubmit = false;
-
-      this.setState({ formState });
-    } else {
-      formState.failedSubmit = true;
-
-      this.setState({ formState });
-    }
-  };
-
-  checkValidity(value, rules) {
-    let isValid = true;
-
-    if (!rules) {
-      return true;
-    }
-    if (rules.required) {
-      isValid = value.trim() !== "" && isValid;
-    }
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-    if (rules.isEmail) {
-      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-      isValid = pattern.test(value) && isValid;
-    }
-    if (rules.isNumeric) {
-      const pattern = /^\d+$/;
-      isValid = pattern.test(value) && isValid;
-    }
-
-    return isValid;
-  }
-
   changeHandler = (event, inputIdentifier) => {
     const formData = { ...this.state.formData };
     const formElement = { ...formData[inputIdentifier] };
     const formState = { ...this.state.formState };
 
     formElement.value = event.target.value;
-    formElement.valid = this.checkValidity(
+    formElement.valid = this.props.onCheckFormElementsValidity(
       formElement.value,
       formElement.validation
     );
@@ -155,7 +110,7 @@ class Contact extends Component {
     }
     formState.isValid = isValid;
 
-    this.setState({ formData, formState });
+    this.setState({ formData, isFormValid: isValid });
   };
 
   render() {
@@ -164,9 +119,10 @@ class Contact extends Component {
         {/* <Banner banner={props.banner} /> */}
         <ContactForm
           formData={this.state.formData}
-          formState={this.state.formState}
+          isFormValid={this.state.isFormValid}
+          formState={this.props.formState}
           addresses={this.state.addresses}
-          submitHandler={this.submitHandler}
+          submitForm={(event) => this.props.onSubmitForm(event, this.state.isFormValid)}
           changeHandler={this.changeHandler}
         />
       </div>
@@ -174,4 +130,21 @@ class Contact extends Component {
   }
 }
 
-export default Contact;
+const mapStateToProps = state => {
+  return {
+    formState: state.form.formState
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onSubmitForm: (event, isFormValid) => dispatch({ type: "SUBMIT_FORM", event, isFormValid }),
+    onCheckFormElementsValidity: (value, rules) =>
+      dispatch(checkFormElementsValidity(value, rules))
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Contact);

@@ -1,9 +1,9 @@
 import React from "react";
-import { connect } from "react-redux";
 
+import classes from "./Form.module.scss";
 import Input from "./Input/Input";
 
-const form = (props) => {
+const form = props => {
   const formElementsArray = [];
 
   for (let key in props.formData) {
@@ -14,14 +14,16 @@ const form = (props) => {
   }
 
   let notification = null;
-  if (props.formState.failedSubmit) {
-    notification = props.notification;
-  } else if (props.formState.isSubmitted) {
-    notification = props.notification;
+  if (props.formState.isSubmitSucceded && props.isFormValid) {
+    notification = <p className={classes.success}>We'll contact you.</p>;
+  } else if (props.formState.isSubmitFailed && !props.isFormValid) {
+    notification = (
+      <p className={classes.error}>All required fields must be filled in.</p>
+    );
   }
 
   return (
-    <form onSubmit={props.submitHandler}>
+    <form onSubmit={props.submitForm}>
       {formElementsArray.map(formElement => {
         return (
           <Input
@@ -34,27 +36,14 @@ const form = (props) => {
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
-            changeHandler={event =>
-              props.changeHandler(event, formElement.id)
-            }
-            onCheckValidity={props.onCheckValidity}
+            changeHandler={event => props.changeHandler(event, formElement.id)}
           />
         );
       })}
-      {props.submitButton}
+      <button>Send Message</button>
       {notification}
     </form>
   );
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onCheckValidity: (value, rules) =>
-      dispatch({ type: "CHECK_VALIDITY", value, rules })
-  };
-};
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(form);
+export default form;

@@ -4,30 +4,16 @@ import classes from "./ContactForm.module.scss";
 import Form from "../../../shared/Form/Form";
 
 const contactForm = props => {
-  const submitButton = <button>Send Message</button>;
-  let notification = null;
-  if (props.formState.isSubmitted && props.formState.isValid) {
-    notification = <p className={classes.success}>We'll contact you.</p>;
-  } else if (
-    props.formState.failedSubmit &&
-    !props.formState.isValid
-  ) {
-    notification = (
-      <p className={classes.error}>All required fields must be filled in.</p>
-    );
-  }
-
-  return (
+    return (
     <section className={classes.form}>
       <h2>Get in Touch</h2>
       <div className={classes.wrapper}>
         <Form
           formData={props.formData}
+          isFormValid={props.isFormValid}
           formState={props.formState}
-          submitHandler={props.submitHandler}
+          submitForm={props.submitForm}
           changeHandler={props.changeHandler}
-          notification={notification}
-          submitButton={submitButton}
         />
 
         <div className={classes.addresses}>
