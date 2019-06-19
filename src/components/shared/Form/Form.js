@@ -7,7 +7,7 @@ const form = props => {
   const formElementsArray = [];
   let button = null;
 
-  if (props.htmlPathname && props.htmlPathname.includes("sign-up")) {
+  if (props.htmlPath && props.htmlPath.includes("sign-up")) {
     for (let key in props.formData.signUp) {
       formElementsArray.push({
         id: key,
@@ -15,7 +15,7 @@ const form = props => {
       });
     }
     button = <button>Sign Up</button>;
-  } else if (props.htmlPathname && props.htmlPathname.includes("sign-in")) {
+  } else if (props.htmlPath && props.htmlPath.includes("sign-in")) {
     for (let key in props.formData.signIn) {
       formElementsArray.push({
         id: key,
@@ -41,7 +41,6 @@ const form = props => {
       <p className={classes.error}>All required fields must be filled in.</p>
     );
   }
-
   return (
     <form className={classes.form} onSubmit={props.submitForm}>
       {formElementsArray.map(formElement => {

@@ -89,15 +89,18 @@ class Auth extends Component {
   changeHandler = (event, inputIdentifier) => {
     const formData = { ...this.state.formData };
     const formState = { ...this.state.formState };
+    const htmlPath = this.props.location.pathname;
+    let signUp = {};
+    let signIn = {};
     let formElement = {};
     let isValid = true;
 
-    if (this.props.location.pathname.includes("sign-up")) {
-      formElement = { ...formData.signUp[inputIdentifier] };
-    } else if (this.props.location.pathname.includes("sign-in")) {
-      formElement = { ...formData.signIn[inputIdentifier] };
-    } else {
-      formElement = { ...formData[inputIdentifier] };
+    if (htmlPath.includes("sign-up")) {
+      signUp = { ...this.state.formData.signUp };
+      formElement = { ...signUp[inputIdentifier] };
+    } else if (htmlPath.includes("sign-in")) {
+      signIn = { ...this.state.formData.signIn };
+      formElement = { ...signIn[inputIdentifier] };
     }
 
     formElement.value = event.target.value;
@@ -107,21 +110,18 @@ class Auth extends Component {
     );
     formElement.touched = true;
 
-    if (this.props.location.pathname.includes("sign-up")) {
-      formData.signUp[inputIdentifier] = formElement;
-      for (let inputIdentifier in formData.signUp) {
-        isValid = formData.signUp[inputIdentifier].valid && isValid;
+    if (htmlPath.includes("sign-up")) {
+      signUp[inputIdentifier] = formElement;
+      for (let inputIdentifier in signUp) {
+        isValid = signUp[inputIdentifier].valid && isValid;
       }
-    } else if (this.props.location.pathname.includes("sign-in")) {
-      formData.signIn[inputIdentifier] = formElement;
-      for (let inputIdentifier in formData.signIn) {
-        isValid = formData.signIn[inputIdentifier].valid && isValid;
+      formData.signUp = signUp;
+    } else if (htmlPath.includes("sign-in")) {
+      signIn[inputIdentifier] = formElement;
+      for (let inputIdentifier in signIn) {
+        isValid = signIn[inputIdentifier].valid && isValid;
       }
-    } else {
-      formData[inputIdentifier] = formElement;
-      for (let inputIdentifier in formData) {
-        isValid = formData[inputIdentifier].valid && isValid;
-      }
+      formData.signIn = signIn;
     }
 
     formState.isValid = isValid;
@@ -137,8 +137,8 @@ class Auth extends Component {
           formData={this.state.formData}
           isFormValid={this.state.isFormValid}
           formState={this.props.formState}
-          htmlPathname={this.props.location.pathname}
-          submitForm={event =>
+          htmlPath={this.props.location.pathname}
+          submitForm={(event) =>
             this.props.onSubmitForm(event, this.state.isFormValid)
           }
           changeHandler={this.changeHandler}
