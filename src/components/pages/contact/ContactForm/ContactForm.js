@@ -13,7 +13,8 @@ const contactForm = props => {
           isFormValid={props.isFormValid}
           formState={props.formState}
           submitForm={props.submitForm}
-          changeHandler={props.changeHandler}
+          updateState={props.updateState}
+          changeFormElement={props.changeFormElement}
         />
 
         <div className={classes.addresses}>

@@ -34,9 +34,9 @@ const form = props => {
   }
 
   let notification = null;
-  if (props.formState.isSubmitSucceded && props.isFormValid) {
+  if (props.formState.isSubmitSucceded && props.formState.isValid) {
     notification = <p className={classes.success}>We'll contact you.</p>;
-  } else if (props.formState.isSubmitFailed && !props.isFormValid) {
+  } else if (props.formState.isSubmitFailed && !props.formState.isValid) {
     notification = (
       <p className={classes.error}>All required fields must be filled in.</p>
     );
@@ -55,7 +55,15 @@ const form = props => {
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
-            changeHandler={event => props.changeHandler(event, formElement.id)}
+            changeFormElement={event =>
+              props.changeFormElement(
+                event,
+                formElement.id,
+                props.formData,
+                props.htmlPath,
+                props.updateState
+              )
+            }
           />
         );
       })}

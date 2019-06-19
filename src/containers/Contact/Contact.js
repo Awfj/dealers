@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { checkFormElementsValidity } from "../../store/reducers/form";
+// import { checkFormElementsValidity } from "../../store/reducers/form";
 
 // import Banner from "../../components/shared/Banner/Banner";
 import ContactForm from "../../components/pages/contact/ContactForm/ContactForm";
@@ -91,26 +91,8 @@ class Contact extends Component {
     ]
   };
 
-  changeHandler = (event, inputIdentifier) => {
-    const formData = { ...this.state.formData };
-    const formElement = { ...formData[inputIdentifier] };
-    const formState = { ...this.state.formState };
-
-    formElement.value = event.target.value;
-    formElement.valid = this.props.onCheckFormElementsValidity(
-      formElement.value,
-      formElement.validation
-    );
-    formElement.touched = true;
-    formData[inputIdentifier] = formElement;
-
-    let isValid = true;
-    for (let inputIdentifier in formData) {
-      isValid = formData[inputIdentifier].valid && isValid;
-    }
-    formState.isValid = isValid;
-
-    this.setState({ formData, isFormValid: isValid });
+  updateState = updatedFormData => {
+    this.setState({ formData: updatedFormData });
   };
 
   render() {
@@ -121,8 +103,11 @@ class Contact extends Component {
           formData={this.state.formData}
           isFormValid={this.state.isFormValid}
           formState={this.props.formState}
-          submitForm={(event) => this.props.onSubmitForm(event, this.state.isFormValid)}
-          changeHandler={this.changeHandler}
+          submitForm={event =>
+            this.props.onSubmitForm(event, this.state.isFormValid)
+          }
+          updateState={this.updateState}
+          changeFormElement={this.props.onChangeFormElement}
           addresses={this.state.addresses}
         />
       </div>
@@ -138,9 +123,23 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitForm: (event, isFormValid) => dispatch({ type: "SUBMIT_FORM", event, isFormValid }),
-    onCheckFormElementsValidity: (value, rules) =>
-      dispatch(checkFormElementsValidity(value, rules))
+    onSubmitForm: (event, isFormValid) =>
+      dispatch({ type: "SUBMIT_FORM", event, isFormValid }),
+    onChangeFormElement: (
+      event,
+      formElementId,
+      formData,
+      htmlPath,
+      updateState
+    ) =>
+      dispatch({
+        type: "CHANGE_FORM_ELEMENT",
+        event,
+        formElementId,
+        formData,
+        htmlPath,
+        updateState
+      })
   };
 };
 

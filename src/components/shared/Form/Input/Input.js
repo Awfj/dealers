@@ -18,7 +18,7 @@ const input = props => {
           id={props.id}
           {...props.elementConfig}
           value={props.value}
-          onChange={props.changeHandler}
+          onChange={props.changeFormElement}
         />
       );
       break;
@@ -29,7 +29,7 @@ const input = props => {
           id={props.id}
           {...props.elementConfig}
           value={props.value}
-          onChange={props.changeHandler}
+          onChange={props.changeFormElement}
         />
       );
       break;
@@ -38,7 +38,7 @@ const input = props => {
         <select
           className={inputClasses.join(" ")}
           value={props.value}
-          onChange={props.changeHandler}
+          onChange={props.changeFormElement}
         >
           {props.elementConfig.options.map(option => (
             <option key={option.value} value={option.value}>
@@ -55,7 +55,7 @@ const input = props => {
           id={props.id}
           {...props.elementConfig}
           value={props.value}
-          onChange={props.changeHandler}
+          onChange={props.changeFormElement}
         />
       );
   }
