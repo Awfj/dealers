@@ -121,9 +121,9 @@ class Contact extends Component {
           formData={this.state.formData}
           isFormValid={this.state.isFormValid}
           formState={this.props.formState}
-          addresses={this.state.addresses}
           submitForm={(event) => this.props.onSubmitForm(event, this.state.isFormValid)}
           changeHandler={this.changeHandler}
+          addresses={this.state.addresses}
         />
       </div>
     );

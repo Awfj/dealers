@@ -5,12 +5,32 @@ import Input from "./Input/Input";
 
 const form = props => {
   const formElementsArray = [];
+  let button = null;
 
-  for (let key in props.formData) {
-    formElementsArray.push({
-      id: key,
-      config: props.formData[key]
-    });
+  if (props.htmlPathname && props.htmlPathname.includes("sign-up")) {
+    for (let key in props.formData.signUp) {
+      formElementsArray.push({
+        id: key,
+        config: props.formData.signUp[key]
+      });
+    }
+    button = <button>Sign Up</button>;
+  } else if (props.htmlPathname && props.htmlPathname.includes("sign-in")) {
+    for (let key in props.formData.signIn) {
+      formElementsArray.push({
+        id: key,
+        config: props.formData.signIn[key]
+      });
+    }
+    button = <button>Sign In</button>;
+  } else {
+    for (let key in props.formData) {
+      formElementsArray.push({
+        id: key,
+        config: props.formData[key]
+      });
+    }
+    button = <button>Send Message</button>;
   }
 
   let notification = null;
@@ -23,7 +43,7 @@ const form = props => {
   }
 
   return (
-    <form onSubmit={props.submitForm}>
+    <form className={classes.form} onSubmit={props.submitForm}>
       {formElementsArray.map(formElement => {
         return (
           <Input
@@ -40,7 +60,7 @@ const form = props => {
           />
         );
       })}
-      <button>Send Message</button>
+      {button}
       {notification}
     </form>
   );

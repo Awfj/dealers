@@ -37,7 +37,8 @@ const header = props => {
               className={classes.cart}
             />
           </Link>
-          <Link to="/dealers/signup">Sign Up</Link>
+          <Link to="/dealers/sign-up">Sign Up</Link>
+          <Link to="/dealers/sign-in">Sign In</Link>
           <button onClick={props.openSideDrawer}>
             <FontAwesomeIcon icon={["fas", "bars"]} />
           </button>

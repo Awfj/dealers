@@ -5,7 +5,7 @@ import Form from "../../../shared/Form/Form";
 
 const contactForm = props => {
     return (
-    <section className={classes.form}>
+    <section className={classes.contactForm}>
       <h2>Get in Touch</h2>
       <div className={classes.wrapper}>
         <Form

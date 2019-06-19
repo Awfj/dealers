@@ -15,7 +15,7 @@ import Shop from "../Shop/Shop";
 import ProductDetails from "../ProductDetails/ProductDetails";
 import Contact from "../Contact/Contact";
 import Cart from "../Cart/Cart";
-import SignUp from "../SignUp/SignUp";
+import Auth from "../Auth/Auth";
 
 library.add(fas, far);
 // console.log(process.env.REACT_APP_API_KEY)
@@ -53,8 +53,12 @@ class App extends Component {
               )}
             />
             <Route
-              path="/dealers/signup"
-              render={props => <SignUp {...props} />}
+              path="/dealers/sign-up"
+              render={props => <Auth {...props} />}
+            />
+            <Route
+              path="/dealers/sign-in"
+              render={props => <Auth {...props} />}
             />
             <Route
               path="/dealers/details/:productId"

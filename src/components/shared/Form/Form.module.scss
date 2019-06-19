@@ -1,8 +1,51 @@
+.form {
+  display: grid;
+  grid-gap: 1.5em;
+  border: 1px solid #eee;
+  padding: 2em;
+  .nameGroup {
+    display: grid;
+    grid-gap: 1.5em;
+  }
+  label {
+    color: #000;
+    font-size: 1rem;
+  }
+  input,
+  textarea {
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    font-size: 1rem;
+    font-family: inherit;
+    margin-top: 0.7em;
+    padding: 0.7em 1em;
+    width: 100%;
+  }
+  textarea {
+    resize: vertical;
+    min-height: 150px;
+  }
+  button {
+    color: white;
+    background-color: #207dff;
+    border-radius: 0.3rem;
+    font-size: 0.8125rem;
+    font-family: inherit;
+    padding: 1em;
+    text-transform: uppercase;
+    transition: 0.3s all ease-in-out;
+    width: 100%;
+    &:hover {
+      background-color: #0068f9;
+    }
+  }
+}
+
 .success,
 .error {
   border-radius: 0.25rem;
   color: white;
-  padding: .5em;
+  padding: 0.5em;
   text-align: center;
 }
 .success {
@@ -10,5 +53,23 @@
 }
 
 .error {
-  background-color:#ff3636;
+  background-color: #ff3636;
+}
+
+@media (min-width: 600px) {
+  .form {
+    justify-self: center;
+  }
+}
+
+@media (min-width: 992px) {
+  .form {
+    justify-self: stretch;
+    grid-gap: 1em;
+    padding: 3em;
+    .nameGroup {
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 2em;
+    }
+  }
 }
