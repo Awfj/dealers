@@ -1,6 +1,7 @@
 const initialState = {
   formState: {
     isSubmitFailed: false,
+    submitFailedFor: "",
     isValid: false,
     isSubmitSucceded: false
   }
@@ -21,13 +22,27 @@ export default reducer;
 
 const submitForm = (state, action) => {
   action.event.preventDefault();
-
   const formState = { ...state.formState };
+  const htmlPath = action.htmlPath;
+  const formData = action.formData;
+  const signUp = action.formData.signUp;
+  const signIn = action.formData.signIn;
+  let isValid = false;
+
+  formState.isValid = checkFormValidity(
+    htmlPath,
+    formData,
+    signUp,
+    signIn,
+    isValid
+  );
+  formState.submitFailedFor = action.htmlPath;
 
   if (formState.isValid) {
     formState.isSubmitSucceded = true;
     formState.isSubmitFailed = false;
   } else {
+    formState.isSubmitSucceded = false;
     formState.isSubmitFailed = true;
   }
 
@@ -45,46 +60,47 @@ const changeFormElement = (state, action) => {
   const htmlPath = action.htmlPath;
   let signUp = {};
   let signIn = {};
-  let formElement = {};
-  let isValid = true;
+  let currentFormElement = {};
+  let isValid = false;
 
-  if (htmlPath && htmlPath.includes("sign-up")) {
+  if (htmlPath.includes("sign-up")) {
     signUp = { ...formData.signUp };
-    formElement = { ...signUp[formElementId] };
-  } else if (htmlPath && htmlPath.includes("sign-in")) {
+    currentFormElement = { ...signUp[formElementId] };
+  } else if (htmlPath.includes("sign-in")) {
     signIn = { ...formData.signIn };
-    formElement = { ...signIn[formElementId] };
-  } else {
-    formElement = { ...updatedFormData[formElementId] };
+    currentFormElement = { ...signIn[formElementId] };
+  } else if (htmlPath.includes("contact")) {
+    currentFormElement = { ...updatedFormData[formElementId] };
   }
 
-  formElement.value = action.event.target.value;
-  formElement.valid = checkFormElementsValidity(
-    formElement.value,
-    formElement.validation
+  currentFormElement.value = action.event.target.value;
+  currentFormElement.valid = checkFormElementsValidity(
+    currentFormElement.value,
+    currentFormElement.validation
   );
-  formElement.touched = true;
+  currentFormElement.touched = true;
 
-  if (htmlPath && htmlPath.includes("sign-up")) {
-    signUp[formElementId] = formElement;
-    for (let formElementId in signUp) {
-      isValid = signUp[formElementId].valid && isValid;
-    }
+  if (htmlPath.includes("sign-up")) {
+    signUp[formElementId] = currentFormElement;
+
     updatedFormData.signUp = signUp;
-  } else if (htmlPath && htmlPath.includes("sign-in")) {
-    signIn[formElementId] = formElement;
-    for (let formElementId in signIn) {
-      isValid = signIn[formElementId].valid && isValid;
-    }
+  } else if (htmlPath.includes("sign-in")) {
+    signIn[formElementId] = currentFormElement;
+
     updatedFormData.signIn = signIn;
-  } else {
-    updatedFormData[formElementId] = formElement;
-    for (let formElementId in updatedFormData) {
-      isValid = updatedFormData[formElementId].valid && isValid;
-    }
+  } else if (htmlPath.includes("contact")) {
+    updatedFormData[formElementId] = currentFormElement;
   }
 
-  formState.isValid = isValid;
+  formState.isValid = checkFormValidity(
+    htmlPath,
+    updatedFormData,
+    signUp,
+    signIn,
+    isValid
+  );
+  formState.isSubmitFailed = false;
+  formState.isSubmitSucceded = false;
 
   action.updateState(updatedFormData);
 
@@ -92,6 +108,38 @@ const changeFormElement = (state, action) => {
     ...state,
     formState
   };
+};
+
+const checkFormValidity = (htmlPath, formData, signUp, signIn, isValid) => {
+  if (htmlPath.includes("sign-up")) {
+    for (let formElement in signUp) {
+      if (!signUp[formElement].valid) {
+        isValid = false;
+        break;
+      } else {
+        isValid = true;
+      }
+    }
+  } else if (htmlPath.includes("sign-in")) {
+    for (let formElement in signIn) {
+      if (!signIn[formElement].valid) {
+        isValid = false;
+        break;
+      } else {
+        isValid = true;
+      }
+    }
+  } else if (htmlPath.includes("contact")) {
+    for (let formElement in formData) {
+      if (!formData[formElement].valid) {
+        isValid = false;
+        break;
+      } else {
+        isValid = true;
+      }
+    }
+  }
+  return isValid;
 };
 
 const checkFormElementsValidity = (value, rules) => {

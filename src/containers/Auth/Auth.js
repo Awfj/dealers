@@ -88,15 +88,24 @@ class Auth extends Component {
   };
 
   render() {
+    const htmlPath = this.props.location.pathname;
+    let heading = null;
+
+    if(htmlPath.includes('sign-up')) {
+      heading = <h2>Sign Up</h2>
+    } else if (htmlPath.includes('sign-in')) {
+      heading = <h2>Sign In</h2>
+    }
+
     return (
       <section className={classes.auth}>
-        <h2>Sign Up</h2>
+        {heading}
         <Form
           formData={this.state.formData}
           formState={this.props.formState}
-          htmlPath={this.props.location.pathname}
+          htmlPath={htmlPath}
           submitForm={event =>
-            this.props.onSubmitForm(event, this.state.isFormValid)
+            this.props.onSubmitForm(event, this.state.formData, htmlPath)
           }
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
@@ -114,8 +123,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitForm: (event, isFormValid) =>
-      dispatch({ type: "SUBMIT_FORM", event, isFormValid }),
+    onSubmitForm: (event, formData, htmlPath) =>
+      dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
     onChangeFormElement: (
       event,
       formElementId,

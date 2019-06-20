@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from "react";
 import { Route, Switch } from "react-router-dom";
-// import axios from "axios";
 import { connect } from "react-redux";
 import { initCollections } from "../../store/reducers/app";
 
@@ -23,6 +22,7 @@ class App extends Component {
   componentDidMount() {
     this.props.onInitCollections();
   }
+
   render() {
     return (
       <Fragment>
@@ -45,7 +45,10 @@ class App extends Component {
                 <Shop collections={this.props.collections} {...props} />
               )}
             />
-            <Route path="/dealers/contact" render={() => <Contact />} />
+            <Route
+              path="/dealers/contact"
+              render={props => <Contact {...props} />}
+            />
             <Route
               path="/dealers/cart"
               render={props => (

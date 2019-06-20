@@ -9,6 +9,8 @@ const navigation = (props) => {
       <NavLink onClick={props.closeSideDrawer} activeClassName={classes.active} to='/dealers/' exact>Collecion</NavLink>
       <NavLink onClick={props.closeSideDrawer} activeClassName={classes.active} to='/dealers/shop'>Shop</NavLink>
       <NavLink onClick={props.closeSideDrawer} activeClassName={classes.active} to='/dealers/contact'>Contact</NavLink>
+      <NavLink onClick={props.closeSideDrawer} activeClassName={classes.active} to='/dealers/sign-in'>Sign In</NavLink>
+      <NavLink onClick={props.closeSideDrawer} activeClassName={classes.active} to='/dealers/sign-up'>Sign Up</NavLink>
     </nav>
   );
 };

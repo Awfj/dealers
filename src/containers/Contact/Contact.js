@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-// import { checkFormElementsValidity } from "../../store/reducers/form";
-
 // import Banner from "../../components/shared/Banner/Banner";
 import ContactForm from "../../components/pages/contact/ContactForm/ContactForm";
 
@@ -96,6 +94,8 @@ class Contact extends Component {
   };
 
   render() {
+    const htmlPath = this.props.location.pathname;
+
     return (
       <div>
         {/* <Banner banner={props.banner} /> */}
@@ -103,8 +103,9 @@ class Contact extends Component {
           formData={this.state.formData}
           isFormValid={this.state.isFormValid}
           formState={this.props.formState}
+          htmlPath={htmlPath}
           submitForm={event =>
-            this.props.onSubmitForm(event, this.state.isFormValid)
+            this.props.onSubmitForm(event, this.state.formData, htmlPath)
           }
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
@@ -123,8 +124,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitForm: (event, isFormValid) =>
-      dispatch({ type: "SUBMIT_FORM", event, isFormValid }),
+    onSubmitForm: (event, formData, htmlPath) =>
+      dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
     onChangeFormElement: (
       event,
       formElementId,

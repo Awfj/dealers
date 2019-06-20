@@ -12,6 +12,7 @@ const contactForm = props => {
           formData={props.formData}
           isFormValid={props.isFormValid}
           formState={props.formState}
+          htmlPath={props.htmlPath}
           submitForm={props.submitForm}
           updateState={props.updateState}
           changeFormElement={props.changeFormElement}
