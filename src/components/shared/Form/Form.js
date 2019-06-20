@@ -8,31 +8,19 @@ const form = props => {
   let button = null;
 
   if (props.htmlPath.includes("sign-up")) {
-    for (let key in props.formData.signUp) {
-      formElementsArray.push({
-        id: key,
-        config: props.formData.signUp[key]
-      });
-    }
     button = <button>Sign Up</button>;
   } else if (props.htmlPath.includes("sign-in")) {
-    for (let key in props.formData.signIn) {
-      formElementsArray.push({
-        id: key,
-        config: props.formData.signIn[key]
-      });
-    }
     button = <button>Sign In</button>;
-  } else {
-    for (let key in props.formData) {
-      formElementsArray.push({
-        id: key,
-        config: props.formData[key]
-      });
-    }
+  } else if (props.htmlPath.includes("contact")) {
     button = <button>Send Message</button>;
   }
 
+  for (let key in props.formData) {
+    formElementsArray.push({
+      id: key,
+      config: props.formData[key]
+    });
+  }
   let notification = null;
 
   if (!props.formState.submitFailedFor.includes(props.htmlPath)) {
@@ -44,7 +32,7 @@ const form = props => {
       <p className={classes.error}>All required fields must be filled in.</p>
     );
   }
-  // console.log(props.formState)
+  
   return (
     <form className={classes.form} onSubmit={props.submitForm}>
       {formElementsArray.map(formElement => {
@@ -64,7 +52,6 @@ const form = props => {
                 event,
                 formElement.id,
                 props.formData,
-                props.htmlPath,
                 props.updateState
               )
             }

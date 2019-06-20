@@ -23,19 +23,10 @@ export default reducer;
 const submitForm = (state, action) => {
   action.event.preventDefault();
   const formState = { ...state.formState };
-  const htmlPath = action.htmlPath;
   const formData = action.formData;
-  const signUp = action.formData.signUp;
-  const signIn = action.formData.signIn;
-  let isValid = false;
+  let formIsValid = false;
 
-  formState.isValid = checkFormValidity(
-    htmlPath,
-    formData,
-    signUp,
-    signIn,
-    isValid
-  );
+  formState.isValid = checkFormValidity(formData, formIsValid);
   formState.submitFailedFor = action.htmlPath;
 
   if (formState.isValid) {
@@ -57,21 +48,8 @@ const changeFormElement = (state, action) => {
   const updatedFormData = { ...formData };
   const formState = { ...state.formState };
   const formElementId = action.formElementId;
-  const htmlPath = action.htmlPath;
-  let signUp = {};
-  let signIn = {};
-  let currentFormElement = {};
-  let isValid = false;
-
-  if (htmlPath.includes("sign-up")) {
-    signUp = { ...formData.signUp };
-    currentFormElement = { ...signUp[formElementId] };
-  } else if (htmlPath.includes("sign-in")) {
-    signIn = { ...formData.signIn };
-    currentFormElement = { ...signIn[formElementId] };
-  } else if (htmlPath.includes("contact")) {
-    currentFormElement = { ...updatedFormData[formElementId] };
-  }
+  const currentFormElement = { ...updatedFormData[formElementId] };
+  let formIsValid = false;
 
   currentFormElement.value = action.event.target.value;
   currentFormElement.valid = checkFormElementsValidity(
@@ -80,25 +58,9 @@ const changeFormElement = (state, action) => {
   );
   currentFormElement.touched = true;
 
-  if (htmlPath.includes("sign-up")) {
-    signUp[formElementId] = currentFormElement;
+  updatedFormData[formElementId] = currentFormElement;
 
-    updatedFormData.signUp = signUp;
-  } else if (htmlPath.includes("sign-in")) {
-    signIn[formElementId] = currentFormElement;
-
-    updatedFormData.signIn = signIn;
-  } else if (htmlPath.includes("contact")) {
-    updatedFormData[formElementId] = currentFormElement;
-  }
-
-  formState.isValid = checkFormValidity(
-    htmlPath,
-    updatedFormData,
-    signUp,
-    signIn,
-    isValid
-  );
+  formState.isValid = checkFormValidity(updatedFormData, formIsValid);
   formState.isSubmitFailed = false;
   formState.isSubmitSucceded = false;
 
@@ -110,61 +72,41 @@ const changeFormElement = (state, action) => {
   };
 };
 
-const checkFormValidity = (htmlPath, formData, signUp, signIn, isValid) => {
-  if (htmlPath.includes("sign-up")) {
-    for (let formElement in signUp) {
-      if (!signUp[formElement].valid) {
-        isValid = false;
-        break;
-      } else {
-        isValid = true;
-      }
-    }
-  } else if (htmlPath.includes("sign-in")) {
-    for (let formElement in signIn) {
-      if (!signIn[formElement].valid) {
-        isValid = false;
-        break;
-      } else {
-        isValid = true;
-      }
-    }
-  } else if (htmlPath.includes("contact")) {
-    for (let formElement in formData) {
-      if (!formData[formElement].valid) {
-        isValid = false;
-        break;
-      } else {
-        isValid = true;
-      }
+const checkFormValidity = (formData, formIsValid) => {
+  for (let formElement in formData) {
+    if (!formData[formElement].valid) {
+      formIsValid = false;
+      break;
+    } else {
+      formIsValid = true;
     }
   }
-  return isValid;
+  return formIsValid;
 };
 
 const checkFormElementsValidity = (value, rules) => {
-  let isValid = true;
+  let elementsAreValid = true;
 
   if (!rules) {
     return true;
   }
   if (rules.required) {
-    isValid = value.trim() !== "" && isValid;
+    elementsAreValid = value.trim() !== "" && elementsAreValid;
   }
   if (rules.minLength) {
-    isValid = value.length >= rules.minLength && isValid;
+    elementsAreValid = value.length >= rules.minLength && elementsAreValid;
   }
   if (rules.maxLength) {
-    isValid = value.length <= rules.maxLength && isValid;
+    elementsAreValid = value.length <= rules.maxLength && elementsAreValid;
   }
   if (rules.isEmail) {
     const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
-    isValid = pattern.test(value) && isValid;
+    elementsAreValid = pattern.test(value) && elementsAreValid;
   }
   if (rules.isNumeric) {
     const pattern = /^\d+$/;
-    isValid = pattern.test(value) && isValid;
+    elementsAreValid = pattern.test(value) && elementsAreValid;
   }
 
-  return isValid;
+  return elementsAreValid;
 };

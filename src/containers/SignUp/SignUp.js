@@ -1,28 +1,15 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-// import Banner from "../../components/shared/Banner/Banner";
-import ContactForm from "../../components/pages/contact/ContactForm/ContactForm";
+import classes from "./SignUp.module.scss";
+import Form from "../../components/shared/Form/Form";
 
-class Contact extends Component {
+class SignUp extends Component {
   state = {
     formData: {
-      firstName: {
+      name: {
         elementType: "input",
-        label: "First Name*",
-        elementConfig: {
-          type: "text"
-        },
-        valid: false,
-        touched: false,
-        value: "",
-        validation: {
-          required: true
-        }
-      },
-      lastName: {
-        elementType: "input",
-        label: "Last Name*",
+        label: "Name",
         elementConfig: {
           type: "text"
         },
@@ -35,7 +22,7 @@ class Contact extends Component {
       },
       email: {
         elementType: "input",
-        label: "Email*",
+        label: "Email",
         elementConfig: {
           type: "text"
         },
@@ -47,46 +34,21 @@ class Contact extends Component {
           isEmail: true
         }
       },
-      subject: {
+      password: {
         elementType: "input",
-        label: "Subject*",
+        label: "Password",
         elementConfig: {
-          type: "text"
+          type: "password"
         },
         valid: false,
         touched: false,
         value: "",
         validation: {
-          required: true
-        }
-      },
-      message: {
-        elementType: "textarea",
-        label: "Message*",
-        valid: false,
-        touched: false,
-        value: "",
-        validation: {
-          required: true
+          required: true,
+          minLength: 6
         }
       }
-    },
-    isFormValid: false,
-    loading: false,
-    addresses: [
-      {
-        city: "New York",
-        address: "203 Fake St. Mountain View, San Francisco, California, USA"
-      },
-      {
-        city: "London",
-        address: "203 Fake St. Mountain View, San Francisco, California, USA"
-      },
-      {
-        city: "Canada",
-        address: "203 Fake St. Mountain View, San Francisco, California, USA"
-      }
-    ]
+    }
   };
 
   updateState = updatedFormData => {
@@ -97,11 +59,10 @@ class Contact extends Component {
     const htmlPath = this.props.location.pathname;
 
     return (
-      <div>
-        {/* <Banner banner={props.banner} /> */}
-        <ContactForm
+      <section className={classes.signUp}>
+        <h2>Sign Up</h2>
+        <Form
           formData={this.state.formData}
-          isFormValid={this.state.isFormValid}
           formState={this.props.formState}
           htmlPath={htmlPath}
           submitForm={event =>
@@ -109,9 +70,8 @@ class Contact extends Component {
           }
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
-          addresses={this.state.addresses}
         />
-      </div>
+      </section>
     );
   }
 }
@@ -126,12 +86,7 @@ const mapDispatchToProps = dispatch => {
   return {
     onSubmitForm: (event, formData, htmlPath) =>
       dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
-    onChangeFormElement: (
-      event,
-      formElementId,
-      formData,
-      updateState
-    ) =>
+    onChangeFormElement: (event, formElementId, formData, updateState) =>
       dispatch({
         type: "CHANGE_FORM_ELEMENT",
         event,
@@ -145,4 +100,4 @@ const mapDispatchToProps = dispatch => {
 export default connect(
   mapStateToProps,
   mapDispatchToProps
-)(Contact);
+)(SignUp);
