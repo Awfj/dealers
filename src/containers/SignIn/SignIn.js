@@ -47,7 +47,7 @@ class SignIn extends Component {
 
     return (
       <section className={classes.signIn}>
-        <h2>Sign Up</h2>
+        <h2>Sign In</h2>
         <Form
           formData={this.state.formData}
           formState={this.props.formState}

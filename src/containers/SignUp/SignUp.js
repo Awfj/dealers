@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { auth } from "../../store/reducers/auth";
 
 import classes from "./SignUp.module.scss";
 import Form from "../../components/shared/Form/Form";
@@ -48,14 +49,26 @@ class SignUp extends Component {
           minLength: 6
         }
       }
-    }
+    },
+    isSignUp: false
   };
 
   updateState = updatedFormData => {
     this.setState({ formData: updatedFormData });
   };
 
+  submitForm = event => {
+    event.preventDefault();
+    this.props.onAuth(
+      this.state.formData.name.value,
+      this.state.formData.email.value,
+      this.state.formData.password.value,
+      this.state.isSignUp
+    )
+  }
+
   render() {
+    // console.log(this.props.error)
     const htmlPath = this.props.location.pathname;
 
     return (
@@ -65,9 +78,10 @@ class SignUp extends Component {
           formData={this.state.formData}
           formState={this.props.formState}
           htmlPath={htmlPath}
-          submitForm={event =>
-            this.props.onSubmitForm(event, this.state.formData, htmlPath)
-          }
+          // submitForm={event =>
+          //   this.props.onSubmitForm(event, this.state.formData, htmlPath)
+          // }
+          submitForm={event => this.submitForm(event, )}
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
         />
@@ -78,12 +92,16 @@ class SignUp extends Component {
 
 const mapStateToProps = state => {
   return {
-    formState: state.form.formState
+    formState: state.form.formState,
+    // loading: state.auth.loading
+    error: state.auth.error
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    onAuth: (name, email, password, isSignUp) =>
+      dispatch(auth(name, email, password, isSignUp)),
     onSubmitForm: (event, formData, htmlPath) =>
       dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
     onChangeFormElement: (event, formElementId, formData, updateState) =>

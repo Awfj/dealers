@@ -1,7 +1,8 @@
 import React, { Component, Fragment } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { initCollections } from "../../store/reducers/app";
+import { authCheckState } from "../../store/reducers/auth";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -18,10 +19,11 @@ import SignUp from "../SignUp/SignUp";
 import SignIn from "../SignIn/SignIn";
 
 library.add(fas, far);
-// console.log(process.env.REACT_APP_API_KEY)
+
 class App extends Component {
   componentDidMount() {
     this.props.onInitCollections();
+    this.props.onAuthCheckState();
   }
 
   render() {
@@ -70,6 +72,7 @@ class App extends Component {
                 <ProductDetails products={this.props.products} {...props} />
               )}
             />
+            <Redirect to="/dealers" />
           </Switch>
         </main>
         <Footer />
@@ -83,7 +86,8 @@ const mapStateToProps = state => {
     collections: state.app.collections,
     products: state.app.collections.products,
     cartIsFull: state.app.cart.isFull,
-    isSideDrawerOpen: state.app.isSideDrawerOpen
+    isSideDrawerOpen: state.app.isSideDrawerOpen,
+    isSignIn: state.auth.token !== null
   };
 };
 
@@ -91,7 +95,8 @@ const mapDispatchTpProps = dispatch => {
   return {
     onInitCollections: () => dispatch(initCollections()),
     onOpenSideDrawer: () => dispatch({ type: "OPEN_SIDE_DRAWER" }),
-    onCloseSideDrawer: () => dispatch({ type: "CLOSE_SIDE_DRAWER" })
+    onCloseSideDrawer: () => dispatch({ type: "CLOSE_SIDE_DRAWER" }),
+    onAuthCheckState: () => dispatch(authCheckState())
   };
 };
 
