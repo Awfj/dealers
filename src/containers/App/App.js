@@ -34,6 +34,7 @@ class App extends Component {
           isSideDrawerOpen={this.props.isSideDrawerOpen}
           openSideDrawer={this.props.onOpenSideDrawer}
           closeSideDrawer={this.props.onCloseSideDrawer}
+          isSignIn={this.props.isSignIn}
         />
         <main>
           <Switch>
@@ -87,7 +88,7 @@ const mapStateToProps = state => {
     products: state.app.collections.products,
     cartIsFull: state.app.cart.isFull,
     isSideDrawerOpen: state.app.isSideDrawerOpen,
-    isSignIn: state.auth.token !== null
+    isSignIn: state.auth.idToken !== null
   };
 };
 

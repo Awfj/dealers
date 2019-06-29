@@ -50,7 +50,7 @@ class SignUp extends Component {
         }
       }
     },
-    isSignUp: false
+    isSignUp: true
   };
 
   updateState = updatedFormData => {
@@ -59,18 +59,19 @@ class SignUp extends Component {
 
   submitForm = event => {
     event.preventDefault();
-    this.props.onAuth(
-      this.state.formData.name.value,
-      this.state.formData.email.value,
-      this.state.formData.password.value,
-      this.state.isSignUp
-    )
-  }
+
+    if (this.props.onAuth) {
+      this.props.onAuth(
+        this.state.formData.email.value,
+        this.state.formData.password.value,
+        this.state.isSignUp
+      );
+    }
+  };
 
   render() {
-    // console.log(this.props.error)
     const htmlPath = this.props.location.pathname;
-
+    // console.log(this.props.auth)
     return (
       <section className={classes.signUp}>
         <h2>Sign Up</h2>
@@ -78,12 +79,10 @@ class SignUp extends Component {
           formData={this.state.formData}
           formState={this.props.formState}
           htmlPath={htmlPath}
-          // submitForm={event =>
-          //   this.props.onSubmitForm(event, this.state.formData, htmlPath)
-          // }
-          submitForm={event => this.submitForm(event, )}
+          submitForm={event => this.submitForm(event)}
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
+          onAuth={this.props.onAuth}
         />
       </section>
     );
@@ -93,15 +92,15 @@ class SignUp extends Component {
 const mapStateToProps = state => {
   return {
     formState: state.form.formState,
-    // loading: state.auth.loading
-    error: state.auth.error
+    error: state.auth.error,
+    auth: state.auth
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAuth: (name, email, password, isSignUp) =>
-      dispatch(auth(name, email, password, isSignUp)),
+    onAuth: (email, password, isSignUp) =>
+      dispatch(auth(email, password, isSignUp)),
     onSubmitForm: (event, formData, htmlPath) =>
       dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
     onChangeFormElement: (event, formElementId, formData, updateState) =>

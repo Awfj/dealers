@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const initialState = {
-  token: null,
+  idToken: null,
   userId: null,
   error: null,
   loading: false,
@@ -34,7 +34,7 @@ const authStart = state => {
 const authSuccess = (state, action) => {
   return {
     ...state,
-    token: action.idToken,
+    idToken: action.idToken,
     userId: action.userId,
     error: null,
     loading: false
@@ -46,11 +46,18 @@ const authFail = (state, action) => {
 };
 
 const authSignOut = state => {
-  return { ...state, token: null, userId: null };
+  return { ...state, idToken: null, userId: null };
+};
+
+const setAuthRedirectPath = (state, action) => {
+  return {
+    ...state,
+    authRedirectPath: action.path
+  };
 };
 
 const signOut = () => {
-  localStorage.removeItem("token");
+  localStorage.removeItem("idToken");
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("userId");
   return {
@@ -58,15 +65,7 @@ const signOut = () => {
   };
 };
 
-const checkAuthTimeout = expirationTime => {
-  return dispatch => {
-    setTimeout(() => {
-      dispatch(signOut());
-    }, expirationTime * 1000);
-  };
-};
-
-export const auth = (name, email, password, isSignUp) => {
+export const auth = (email, password, isSignUp) => {
   const API_KEY = process.env.REACT_APP_API_KEY;
 
   return dispatch => {
@@ -76,25 +75,21 @@ export const auth = (name, email, password, isSignUp) => {
       password,
       returnSecureToken: true
     };
-    let url = null;
-    if (isSignUp) {
+    let url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${API_KEY}`;
+    if (!isSignUp) {
       url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/verifyPassword?key=${API_KEY}`;
-    } else {
-      url = `https://www.googleapis.com/identitytoolkit/v3/relyingparty/signupNewUser?key=${API_KEY}`;
     }
 
     axios
       .post(url, authData)
       .then(response => {
         const expirationDate = new Date(
-          new Date().getTime + response.data.expiresIn * 1000
+          new Date().getTime() + response.data.expiresIn * 1000
         );
         const idToken = response.data.idToken;
         const userId = response.data.localId;
-        // const expiresIn = response.data.expiresIn;
-        // console.log(response.data.localId)
 
-        localStorage.setItem("token", idToken);
+        localStorage.setItem("idToken", idToken);
         localStorage.setItem("expirationDate", expirationDate);
         localStorage.setItem("userId", userId);
         dispatch({ type: "AUTH_SUCCESS", idToken, userId });
@@ -106,17 +101,10 @@ export const auth = (name, email, password, isSignUp) => {
   };
 };
 
-const setAuthRedirectPath = (state, action) => {
-  return {
-    ...state,
-    authRedirectPath: action.path
-  };
-};
-
 export const authCheckState = () => {
   return dispatch => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    const idToken = localStorage.getItem("idToken");
+    if (!idToken) {
       dispatch(signOut());
     } else {
       const expirationDate = new Date(localStorage.getItem("expirationDate"));
@@ -124,7 +112,7 @@ export const authCheckState = () => {
         dispatch(signOut());
       } else {
         const userId = localStorage.getItem("userId");
-        dispatch({ type: "AUTH_SUCCESS", token, userId });
+        dispatch({ type: "AUTH_SUCCESS", idToken, userId });
         dispatch(
           checkAuthTimeout(
             (expirationDate.getTime() - new Date().getTime()) / 1000
@@ -132,5 +120,13 @@ export const authCheckState = () => {
         );
       }
     }
+  };
+};
+
+const checkAuthTimeout = expirationTime => {
+  return dispatch => {
+    setTimeout(() => {
+      dispatch(signOut());
+    }, expirationTime * 1000);
   };
 };

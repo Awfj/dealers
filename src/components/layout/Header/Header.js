@@ -22,7 +22,7 @@ const header = props => {
           Dealers
         </Link>
 
-        <Navigation navHeader={classes.navigation} />
+        <Navigation navHeader={classes.navigation} isSignIn={props.isSignIn} />
 
         <div className={classes.icons}>
           {/* <a href="/">
