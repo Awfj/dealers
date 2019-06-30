@@ -1,8 +1,10 @@
 .navigation {
-  a {
+  a, button {
     color: #25262a;
     transition: 0.2s all ease-in-out;
+    outline: none;
     &:hover,
+    &:focus,
     &:active,
     &.active {
       color: #207dff;

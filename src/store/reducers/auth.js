@@ -45,10 +45,6 @@ const authFail = (state, action) => {
   return { ...state, error: action.error, loading: false };
 };
 
-const authSignOut = state => {
-  return { ...state, idToken: null, userId: null };
-};
-
 const setAuthRedirectPath = (state, action) => {
   return {
     ...state,
@@ -56,7 +52,11 @@ const setAuthRedirectPath = (state, action) => {
   };
 };
 
-const signOut = () => {
+const authSignOut = state => {
+  return { ...state, idToken: null, userId: null };
+};
+
+export const signOut = () => {
   localStorage.removeItem("idToken");
   localStorage.removeItem("expirationDate");
   localStorage.removeItem("userId");

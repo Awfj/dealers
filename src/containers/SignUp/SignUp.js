@@ -71,7 +71,6 @@ class SignUp extends Component {
 
   render() {
     const htmlPath = this.props.location.pathname;
-    // console.log(this.props.auth)
     return (
       <section className={classes.signUp}>
         <h2>Sign Up</h2>
@@ -82,7 +81,6 @@ class SignUp extends Component {
           submitForm={event => this.submitForm(event)}
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
-          onAuth={this.props.onAuth}
         />
       </section>
     );

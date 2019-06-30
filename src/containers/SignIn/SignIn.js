@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { auth } from "../../store/reducers/auth";
 
 import classes from "./SignIn.module.scss";
 import Form from "../../components/shared/Form/Form";
@@ -35,11 +36,24 @@ class SignIn extends Component {
           minLength: 6
         }
       }
-    }
+    },
+    isSignUp: false
   };
 
   updateState = updatedFormData => {
     this.setState({ formData: updatedFormData });
+  };
+
+  submitForm = event => {
+    event.preventDefault();
+
+    if (this.props.onAuth) {
+      this.props.onAuth(
+        this.state.formData.email.value,
+        this.state.formData.password.value,
+        this.state.isSignUp
+      );
+    }
   };
 
   render() {
@@ -52,9 +66,10 @@ class SignIn extends Component {
           formData={this.state.formData}
           formState={this.props.formState}
           htmlPath={htmlPath}
-          submitForm={event =>
-            this.props.onSubmitForm(event, this.state.formData, htmlPath)
-          }
+          // submitForm={event =>
+          //   // this.props.onSubmitForm(event, this.state.formData, htmlPath)
+          // }
+          submitForm={event => this.submitForm(event)}
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
         />
@@ -71,6 +86,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    onAuth: (email, password, isSignUp) =>
+      dispatch(auth(email, password, isSignUp)),
     onSubmitForm: (event, formData, htmlPath) =>
       dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
     onChangeFormElement: (event, formElementId, formData, updateState) =>

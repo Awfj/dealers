@@ -51,7 +51,9 @@ const navigation = props => {
             Sign Up
           </NavLink>
         </Fragment>
-      ) : null}
+      ) : (
+        <button onClick={props.signOut}>Sign Out</button>
+      )}
     </nav>
   );
 };

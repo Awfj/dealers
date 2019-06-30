@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import { Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
 import { initCollections } from "../../store/reducers/app";
-import { authCheckState } from "../../store/reducers/auth";
+import { authCheckState, signOut } from "../../store/reducers/auth";
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
@@ -35,6 +35,7 @@ class App extends Component {
           openSideDrawer={this.props.onOpenSideDrawer}
           closeSideDrawer={this.props.onCloseSideDrawer}
           isSignIn={this.props.isSignIn}
+          signOut={this.props.onSignOut}
         />
         <main>
           <Switch>
@@ -97,7 +98,8 @@ const mapDispatchTpProps = dispatch => {
     onInitCollections: () => dispatch(initCollections()),
     onOpenSideDrawer: () => dispatch({ type: "OPEN_SIDE_DRAWER" }),
     onCloseSideDrawer: () => dispatch({ type: "CLOSE_SIDE_DRAWER" }),
-    onAuthCheckState: () => dispatch(authCheckState())
+    onAuthCheckState: () => dispatch(authCheckState()),
+    onSignOut: () => dispatch(signOut())
   };
 };
 
