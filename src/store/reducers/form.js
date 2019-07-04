@@ -9,8 +9,8 @@ const initialState = {
 
 const reducer = (state = initialState, action) => {
   switch (action.type) {
-    case "SUBMIT_FORM":
-      return submitForm(state, action);
+    case "VERIFY_FORM":
+      return verifyForm(state, action);
     case "CHANGE_FORM_ELEMENT":
       return changeFormElement(state, action);
     default:
@@ -20,7 +20,7 @@ const reducer = (state = initialState, action) => {
 
 export default reducer;
 
-const submitForm = (state, action) => {
+const verifyForm = (state, action) => {
   action.event.preventDefault();
   const formState = { ...state.formState };
   const formData = action.formData;

@@ -105,7 +105,7 @@ class Contact extends Component {
           formState={this.props.formState}
           htmlPath={htmlPath}
           submitForm={event =>
-            this.props.onSubmitForm(event, this.state.formData, htmlPath)
+            this.props.onVerifyForm(event, this.state.formData, htmlPath)
           }
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
@@ -124,8 +124,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onSubmitForm: (event, formData, htmlPath) =>
-      dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
+    onVerifyForm: (event, formData, htmlPath) =>
+      dispatch({ type: "VERIFY_FORM", event, formData, htmlPath }),
     onChangeFormElement: (
       event,
       formElementId,

@@ -47,28 +47,26 @@ class SignIn extends Component {
   submitForm = event => {
     event.preventDefault();
 
-    if (this.props.onAuth) {
-      this.props.onAuth(
-        this.state.formData.email.value,
-        this.state.formData.password.value,
-        this.state.isSignUp
-      );
-    }
+    this.props.onVerifyForm(
+      event,
+      this.state.formData,
+      this.props.location.pathname
+    );
+    this.props.onAuth(
+      this.state.formData.email.value,
+      this.state.formData.password.value,
+      this.state.isSignUp
+    );
   };
 
   render() {
-    const htmlPath = this.props.location.pathname;
-
     return (
       <section className={classes.signIn}>
         <h2>Sign In</h2>
         <Form
           formData={this.state.formData}
           formState={this.props.formState}
-          htmlPath={htmlPath}
-          // submitForm={event =>
-          //   // this.props.onSubmitForm(event, this.state.formData, htmlPath)
-          // }
+          htmlPath={this.props.location.pathname}
           submitForm={event => this.submitForm(event)}
           updateState={this.updateState}
           changeFormElement={this.props.onChangeFormElement}
@@ -88,8 +86,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignUp) =>
       dispatch(auth(email, password, isSignUp)),
-    onSubmitForm: (event, formData, htmlPath) =>
-      dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
+    onVerifyForm: (event, formData, htmlPath) =>
+      dispatch({ type: "VERIFY_FORM", event, formData, htmlPath }),
     onChangeFormElement: (event, formElementId, formData, updateState) =>
       dispatch({
         type: "CHANGE_FORM_ELEMENT",

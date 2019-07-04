@@ -60,13 +60,16 @@ class SignUp extends Component {
   submitForm = event => {
     event.preventDefault();
 
-    if (this.props.onAuth) {
-      this.props.onAuth(
-        this.state.formData.email.value,
-        this.state.formData.password.value,
-        this.state.isSignUp
-      );
-    }
+    this.props.onVerifyForm(
+      event,
+      this.state.formData,
+      this.props.location.pathname
+    );
+    this.props.onAuth(
+      this.state.formData.email.value,
+      this.state.formData.password.value,
+      this.state.isSignUp
+    );
   };
 
   render() {
@@ -99,8 +102,8 @@ const mapDispatchToProps = dispatch => {
   return {
     onAuth: (email, password, isSignUp) =>
       dispatch(auth(email, password, isSignUp)),
-    onSubmitForm: (event, formData, htmlPath) =>
-      dispatch({ type: "SUBMIT_FORM", event, formData, htmlPath }),
+    onVerifyForm: (event, formData, htmlPath) =>
+      dispatch({ type: "VERIFY_FORM", event, formData, htmlPath }),
     onChangeFormElement: (event, formElementId, formData, updateState) =>
       dispatch({
         type: "CHANGE_FORM_ELEMENT",
